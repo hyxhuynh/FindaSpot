@@ -55,7 +55,7 @@
         }
         
         body {
-            background-color: white;
+            background-color: black;
         }
         
 
@@ -94,6 +94,10 @@
           </ul>
         </div>
       </nav>
+
+      <button id="testLocation">Get current location</button>
+
+
 
 
 
@@ -164,6 +168,20 @@
             for (let i = 0; i < markers.length; i++) {
                 addMarker(markers[i])
             }
+
+            // I want the map to show me the current location depending on where I am as a user (Current actual location).
+            // document.getElementById("#testLocation").on("click", function name(params) {
+                
+            //     if (navigation.geolocation) {
+            //         navigator.geolocation.getCurrentPosition(function(position) {
+            //             console.log(position);
+            //         });
+            //     } else {
+            //         console.log("Your current browser does not support geolocation");
+            //     }
+
+            // });
+            
             
            
         }
