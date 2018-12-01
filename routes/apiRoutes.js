@@ -1,6 +1,20 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+    // Post new parking space
+    app.post("/api/parkingspace", function(req, res) {
+        let spaceInfo = req.body;
+
+        console.log(spaceInfo);
+
+        db.ParkingSpace.create(spaceInfo).then( function(response) {
+            res.send(response);
+        });
+    });
+
+
+
     // Get all examples
     app.get("/api/examples", function(req, res) {
         db.Example.findAll({}).then(function(dbExamples) {
