@@ -1,7 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
     var Reservation = sequelize.define("Reservation", {
-        text: DataTypes.STRING,
-        description: DataTypes.TEXT
+        // Corresponds to a ParkingSpace ID
+        spaceID: DataTypes.INTEGER,
+
+        // Corresponds to User ID
+        reservingUserID: DataTypes.INTEGER,
+
+        // Reservation time info
+        reservationStart: DataTypes.DATE,
+        reservationEnd: DataTypes.DATE
     });
     return Reservation;
 };
