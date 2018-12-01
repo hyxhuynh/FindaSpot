@@ -1,0 +1,41 @@
+#map {
+    height: 650px;
+}
+
+#navBackground {
+    background-color: #272A57;
+}
+
+.navbar-brand {
+    color: #59A2FE !important;
+}
+
+a {
+    color: #59A2FE !important;
+}
+
+a:hover {
+    color: black !important;
+}
+
+.mapRight {
+    width: 25%;
+    float: right;
+    
+}
+
+#aviSpotsTable {
+    float: left;
+    width: 74%;
+    background-color: #272A57;
+    height: 650px;
+    
+}
+
+#wrapper {
+    margin: 20px;
+}
+
+body {
+    background-color: black;
+}
