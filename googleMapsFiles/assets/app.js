@@ -82,3 +82,16 @@
         
        
     };
+
+
+    // Code for the address input box
+
+    function initAutocomplete() {
+        var input = document.getElementById("autocomplete");
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        
+        $("#addressButton").on("click", function(event) {
+            event.preventDefault();
+            console.log(input.value);
+        });
+      }
