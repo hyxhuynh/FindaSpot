@@ -5,7 +5,8 @@ console.log("Linked");
 
 // Google maps API key
 
-// var mapAPIkey = "AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw"
+// var mapAPIkey = AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw
+// var geoLocationAPI = AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk
 // Array of markers
 var markers =[
     {coords: {lat:47.612667, lng: -122.322600}, content: "<h6>Status: Available<br>Location: Apt parking <br>Max usage: 72 hours</h6>"},
@@ -35,7 +36,7 @@ function initMap() {
         var options = {
             zoom: 13,
             center: {lat: userLat, lng: userLng}
-        }
+        };
         map = new google.maps.Map(document.getElementById("map"), options);
 
         function addMarker(props) {
@@ -75,6 +76,18 @@ function initAutocomplete() {
     $("#addressButton").on("click", function(event) {
         event.preventDefault();
         console.log(input.value);
+        var userAddress = input.value;
+
+        // AJAX call for google geolocator converter
+
+        $.ajax({
+            type: "GET",
+            url: "https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk"
+
+        }).then(function (result) {
+            console.log(result);
+        });
     });
 
 }
+
