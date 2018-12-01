@@ -2,6 +2,29 @@ var db = require("../models");
 
 module.exports = function(app) {
 
+    // Get parking spaces near location
+    app.get("/api/parkingspace", function(req,res) {
+        console.log(req.query);
+        const latitude = req.query.lat;
+        const longitude = req.query.long;
+
+        // If coordinates provided, search near coordinates
+        if (latitude && longitude) {
+            // Find spaces near coordinates
+            db.ParkingSpace.findAll({
+                where: {
+                    latitude: latitude,
+                    longitude: longitude
+                }
+            }).then( response => {
+                res.json(response);
+            });
+        } else {
+            res.status(400).end();
+        }
+
+    });
+
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
