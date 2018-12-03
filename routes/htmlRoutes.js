@@ -10,6 +10,13 @@ module.exports = function(app) {
         });
     });
 
+    //Load lists googleMaps page with google map
+    app.get("/googlemaps", auth.isLoggedIn, function(req, res) {
+        res.render("googleMaps", {
+            loggedIn: true
+        });
+    });
+
     // Load example page and pass in an example by id
     app.get("/example/:id", auth.isLoggedIn, function(req, res) {
         db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {

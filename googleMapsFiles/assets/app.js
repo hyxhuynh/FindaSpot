@@ -26,8 +26,34 @@ var markers =[
     {coords: {lat:47.607480, lng: -122.335200},
         content: "<h6>Status: Not available<br>Location: Apt parking <br>Max usage: 48 hours</h6>"}
 ];
-    // Gather the users current geolocation and display that lat and lng as the starting map location
+
 var map;
+//Add a marker from the markers array above
+function addMarker(props) {
+    var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+        icon: "https://maps.gstatic.com/mapfiles/ms2/micons/parkinglot.png"
+    });
+
+    // Check if needs different iconImage vs defult setIcon to props.icon link
+    if (props.icon) {
+        // set icon image
+        marker.setIcon(props.icon);
+    }
+    // Check if needs content with marker
+    if (props.content) {
+        var infowindow = new google.maps.InfoWindow({
+            content: props.content });
+    }
+    // On click of marker display infoWindow
+    marker.addListener("click",function () {
+        infowindow.open(map, marker);
+    });
+}
+
+// Gather the users current geolocation and display that lat and lng as the starting map location
+
 function initMap() {
     navigator.geolocation.getCurrentPosition(function (currentPosition) {
         var userLat = currentPosition.coords.latitude;
@@ -39,37 +65,14 @@ function initMap() {
         };
         map = new google.maps.Map(document.getElementById("map"), options);
 
-        function addMarker(props) {
-            console.log("running");
-            var marker = new google.maps.Marker({
-                position: props.coords,
-                map: map,
-                icon: "https://maps.gstatic.com/mapfiles/ms2/micons/parkinglot.png"
-            });
-
-            // Check if needs different iconImage vs defult setIcon to props.icon link
-            if (props.icon) {
-                // set icon image
-                marker.setIcon(props.icon);
-            }
-            // Check if needs content with marker
-            if (props.content) {
-                var infowindow = new google.maps.InfoWindow({
-                    content: props.content });
-            }
-            // On click of marker display infoWindow
-            marker.addListener("click",function () {
-                infowindow.open(map, marker);
-            });
-        }
         // loop throw array of markers and run addMarker function on each object in markers array
         for (i = 0; i < markers.length; i++) {
             addMarker(markers[i]);
         }
     });
 }
-// Code for the address input box
 
+// Code for the address input box
 function initAutocomplete() {
     var input = document.getElementById("autocomplete");
     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -83,11 +86,24 @@ function initAutocomplete() {
         $.ajax({
             type: "GET",
             url: "https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk"
-
         }).then(function (result) {
-            console.log(result);
+            // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
+            var newAddressLat = result.results[0].geometry.location.lat;
+            var newAddressLng = result.results[0].geometry.location.lng;
+            // Create an obj with the coords and info from the create spot form and push that obj to the database/arrry so that it can be passed
+            // into the addMarker function
+            var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
+                content: "<h6>That new pin though :)</h6>"};
+            // push new marker obj to the arry of markers
+            markers.push(newMarker);
+
+            console.log(markers);
+            // Reload map with new markers
+            initMap();
+
         });
     });
 
 }
+
 
