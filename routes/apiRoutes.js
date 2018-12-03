@@ -55,6 +55,16 @@ module.exports = function(app) {
         }
     });
 
+    // Delete parking space info
+    app.delete("/api/parkingspace/:id", (req, res) => {
+        const id = req.params.id;
+        db.ParkingSpace.destroy({
+            where: {id:id}
+        }).then( response => {
+            res.json(response);
+        });
+    });
+
 
 
     // Get all examples
