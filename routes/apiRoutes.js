@@ -25,14 +25,15 @@ module.exports = function(app) {
                 },
                 attributes: {include:
                     // Distance calculation
-                    [[sequelize.literal(" (6371 * acos ( "
+                    [[sequelize.literal("(6371 * acos ( "
                     + "cos( radians("+targLatitude+") ) "
                     + "* cos( radians( latitude ) ) "
-                    + "* cos( radians( longitude ) - radians("+targLongitude+") )"
-                    + "+ sin( radians("+targLatitude+") )"
-                    + "* sin( radians( latitude )))) " ), "distance"]]
+                    + "* cos( radians( longitude ) - radians("+targLongitude+") ) "
+                    + "+ sin(radians("+targLatitude+")) "
+                    + "* sin(radians( latitude )) ))" ), "distance"]]
                 },
-                // order: [["distance","DESC"]]
+                // Order by distance from provided coordinates
+                order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
             });
