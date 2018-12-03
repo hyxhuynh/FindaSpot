@@ -1,5 +1,6 @@
 #map {
     height: 650px;
+    border-radius: 15px;
 }
 
 #navBackground {
@@ -8,14 +9,15 @@
 
 .navbar-brand {
     color: #59A2FE !important;
+    font-weight: bold;
 }
 
 a {
-    color: #59A2FE !important;
+    color: #B1D3FE !important;
 }
 
 a:hover {
-    color: black !important;
+    color:  #59A2FE !important;
 }
 
 .mapRight {
@@ -29,6 +31,8 @@ a:hover {
     width: 74%;
     background-color: #272A57;
     height: 650px;
+    border: solid 2.5px #59A2FE;
+    border-radius: 15px;
     
 }
 
@@ -38,4 +42,12 @@ a:hover {
 
 body {
     background-color: black;
+}
+
+#backOfHomeTag {
+    color: #272A57 !important; 
+}
+
+#searchNav {
+    margin-left: 45%
 }
