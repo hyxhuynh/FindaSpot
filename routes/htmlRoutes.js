@@ -10,18 +10,14 @@ module.exports = function(app) {
         });
     });
 
-<<<<<<< HEAD
-    //Load lists googleMaps page with google map
-    app.get("/googlemaps", auth.isLoggedIn, function(req, res) {
-        res.render("googleMaps", {
-            loggedIn: true
-        });
-    });
-
-=======
     // Render Driver Application page
     app.get("/driver/application", function(req, res) {
         res.render("driverApplication");
+    });
+
+    // Render Driver Application page
+    app.get("/googleMapsPage", function(req, res) {
+        res.render("googleMaps");
     });
 
     // Render Owner Application page
@@ -47,7 +43,6 @@ module.exports = function(app) {
     });
 
 
->>>>>>> 02df2b0b49eeda843217bfe7f516798ea4e7d3aa
     // Load example page and pass in an example by id
     app.get("/example/:id", auth.isLoggedIn, function(req, res) {
         db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
