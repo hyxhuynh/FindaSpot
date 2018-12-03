@@ -15,6 +15,11 @@ module.exports = function(app) {
         res.render("driverApplication");
     });
 
+    // Render Driver Application page
+    app.get("/googleMapsPage", function(req, res) {
+        res.render("googleMaps");
+    });
+
     // Render Owner Application page
     app.get("/owner/application", function(req, res) {
         res.render("ownerApplication");
