@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         // Particulars of space
         spaceSize: DataTypes.ENUM("standard","compact","motorcycle","rv"),
         spaceCover: DataTypes.ENUM("uncovered","covered","garage"),
-
+        price: DataTypes.DOUBLE,
         description: DataTypes.TEXT
     });
     return ParkingSpace;
