@@ -1,0 +1,108 @@
+    
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
+
+<!-- Date and Time picker -->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<link href="/styles/dateTimePickerStyle.css" rel="stylesheet">
+<link href="/styles/materialize.css" rel="stylesheet">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<form id="regForm" action="/owner/confirmation">
+    <h4>List Your Parking Space</h4>
+    <!-- One "tab" for each step in the form: -->
+    <!-- FIRST TAB -->
+    <div class="tab">
+        <h5>Enter Your Address</h5>
+
+        <!-- address-line1 input-->
+        <div class="control-group">
+                <label class="control-label">Address Line 1</label>
+                <div class="controls">
+                    <input id="address-line1" name="address-line1" type="text" placeholder="address line 1"
+                    class="input-xlarge">
+                    <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                </div>
+            </div>
+            <!-- address-line2 input-->
+            <div class="control-group">
+                <label class="control-label">Address Line 2</label>
+                <div class="controls">
+                    <input id="address-line2" name="address-line2" type="text" placeholder="address line 2"
+                    class="input-xlarge">
+                    <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
+                </div>
+            </div>
+            <!-- city input-->
+            <div class="control-group">
+                <label class="control-label">City / Town</label>
+                <div class="controls">
+                    <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <!-- region input-->
+            <div class="control-group">
+                <label class="control-label">State / Province / Region</label>
+                <div class="controls">
+                    <input id="region" name="region" type="text" placeholder="state / province / region"
+                    class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <!-- postal-code input-->
+            <div class="control-group">
+                <label class="control-label">Zip / Postal Code</label>
+                <div class="controls">
+                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
+                    class="input-xlarge">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+    </div>
+    <!-- SECOND TAB -->
+    <div class="tab">
+        <h5>Parking Location</h5>
+        <p>
+            Customer will go to your posted location. Adjust the pin to match your parking space exact location.
+        </p>
+        <!-- <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+        <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p> -->
+    </div>
+    <!-- THIRD TAB -->
+    <div class="tab">
+            <h5>Parking Space</h5>
+            <p>Where is your parking location?<input placeholder="Note for developer: This should display address enter previously." name="location" ></p>
+            <p>Which type of parking space do you have?<input placeholder="Garage or Outdoor" name="parkingSpotType" ></p>
+            <p>What size is your parking space?<input placeholder="Compact or Regular" name="parkingSpotSize" ></p>
+            <p>Additional description of the Parking Space:<input placeholder="Type here" name="parkingSpotDesc" ></p>
+    </div>
+    <!-- FOURTH TAB -->
+    <div class="tab">
+        <h5>Contact Information</h5>
+        <p><input placeholder="Your Name" name="ownerName" ></p>
+        <p><input placeholder="Phone Number" name="ownerPhone" ></p>
+        <p><input placeholder="Email Address" name="ownerEmail" ></p>
+    </div>
+    <div style="overflow:auto;">
+        <div style="float:right;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+    </div>
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+</form>
+
+<!-- JavaScript/jQuery -->
+<script src="/js/application.js"></script>
+<script src="/js/materialize.js"></script>
+<script src="/js/daysCalculation.js"></script>
