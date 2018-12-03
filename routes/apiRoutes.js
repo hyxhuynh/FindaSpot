@@ -32,8 +32,27 @@ module.exports = function(app) {
         console.log(spaceInfo);
 
         db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.send(response);
+            res.status(201).send(response);
         });
+    });
+
+    // Update parking space info
+    app.put("/api/parkingspace/:id", function (req, res) {
+        const id = req.params.id;
+        // TODO: Validate info passed in body to ensure only valid fields and no update to id
+        const updatedInfo = req.body;
+
+        if (id) {
+            db.ParkingSpace.update(updatedInfo,
+                {
+                    where: {id:id}
+                }
+            ).then( function(response) {
+                res.status(200).send(response);
+            });
+        } else {
+            res.status(400).end();
+        }
     });
 
 
