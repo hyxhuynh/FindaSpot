@@ -10,6 +10,7 @@ module.exports = function(app) {
         });
     });
 
+<<<<<<< HEAD
     //Load lists googleMaps page with google map
     app.get("/googlemaps", auth.isLoggedIn, function(req, res) {
         res.render("googleMaps", {
@@ -17,6 +18,36 @@ module.exports = function(app) {
         });
     });
 
+=======
+    // Render Driver Application page
+    app.get("/driver/application", function(req, res) {
+        res.render("driverApplication");
+    });
+
+    // Render Owner Application page
+    app.get("/owner/application", function(req, res) {
+        res.render("ownerApplication");
+    });
+
+    // Render Owner Application page
+    app.get("/owner/confirmation", function(req, res) {
+        res.render("ownerConfirmation", {
+            addressLineOne: req.query["address-line1"],
+            addressLineTwo: req.query["address-line2"],
+            city: req.query.city,
+            region: req.query.region,
+            postalCode: req.query["postal-code"],
+            type: req.query.parkingSpotType,
+            size: req.query.parkingSpotSize,
+            description: req.query.parkingSpotDesc,
+            ownerName: req.query.ownerName,
+            ownerPhone: req.query.ownerPhone,
+            ownerEmail: req.query.ownerEmail
+        });
+    });
+
+
+>>>>>>> 02df2b0b49eeda843217bfe7f516798ea4e7d3aa
     // Load example page and pass in an example by id
     app.get("/example/:id", auth.isLoggedIn, function(req, res) {
         db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
@@ -31,4 +62,5 @@ module.exports = function(app) {
     app.get("*", function(req, res) {
         res.render("404");
     });
+
 };
