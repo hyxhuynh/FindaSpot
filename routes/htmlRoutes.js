@@ -3,12 +3,10 @@ var auth = require("../auth/util");
 module.exports = function(app) {
     // Load index page
     app.get("/", auth.isLoggedIn, function(req, res) {
-        db.Example.findAll({}).then(function(dbExamples) {
-            res.render("index", {
-                msg: "Welcome!",
-                examples: dbExamples,
-                loggedIn: true
-            });
+        res.render("index", {
+            msg: "Welcome!",
+            examples: null,
+            loggedIn: true
         });
     });
 
