@@ -1,21 +1,38 @@
-var db = require("../models");
+const db = require("../models");
+const sequelize = require("sequelize");
+const Op =sequelize.Op;
 
 module.exports = function(app) {
 
     // Get parking spaces near location
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
-        const latitude = req.query.lat;
-        const longitude = req.query.long;
+        const targLatitude = parseFloat(req.query.lat);
+        const targLongitude = parseFloat(req.query.long);
 
         // If coordinates provided, search near coordinates
-        if (latitude && longitude) {
+        if (targLatitude && targLongitude) {
             // Find spaces near coordinates
             db.ParkingSpace.findAll({
                 where: {
-                    latitude: latitude,
-                    longitude: longitude
-                }
+                    // Limit results to within 1 degree of lat/long provided
+                    latitude: {
+                        [Op.between]: [(targLatitude-1), (targLatitude+1)]
+                    },
+                    longitude: {
+                        [Op.between]: [targLongitude-1, targLongitude+1]
+                    }
+                },
+                attributes: {include:
+                    // Distance calculation
+                    [[sequelize.literal(" (6371 * acos ( "
+                    + "cos( radians("+targLatitude+") ) "
+                    + "* cos( radians( latitude ) ) "
+                    + "* cos( radians( longitude ) - radians("+targLongitude+") )"
+                    + "+ sin( radians("+targLatitude+") )"
+                    + "* sin( radians( latitude )))) " ), "distance"]]
+                },
+                // order: [["distance","DESC"]]
             }).then( response => {
                 res.json(response);
             });
