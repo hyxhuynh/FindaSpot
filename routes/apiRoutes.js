@@ -66,6 +66,18 @@ module.exports = function(app) {
         });
     });
 
+    // Get parking space by id
+    app.get("/api/parkingspace/:id", function(req,res) {
+        const id = req.params.id;
+
+        // Find spaces near coordinates
+        db.ParkingSpace.findAll({
+            where: { id: id },
+        }).then( response => {
+            res.json(response);
+        });
+    });
+
     // Update parking space info
     app.put("/api/parkingspace/:id", function (req, res) {
         const id = req.params.id;
