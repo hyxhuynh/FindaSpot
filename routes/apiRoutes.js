@@ -51,6 +51,15 @@ module.exports = function(app) {
 
         db.ParkingSpace.create(spaceInfo).then( function(response) {
             res.status(201).json(response);
+        }).catch(err => {
+
+            if (err instanceof sequelize.ForeignKeyConstraintError) {
+                console.log(err.message);
+                res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+            } else {
+                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                throw err;
+            }
         });
     });
 
