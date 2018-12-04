@@ -56,6 +56,9 @@ module.exports = function(app) {
             if (err instanceof sequelize.ForeignKeyConstraintError) {
                 console.log(err.message);
                 res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+            } else if (err instanceof sequelize.ValidationError) {
+                console.log(err.message);
+                res.status(400).send("400 BAD REQUEST:\n"+err.message);
             } else {
                 res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
                 throw err;
