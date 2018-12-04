@@ -1,8 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var ParkingSpace = sequelize.define("ParkingSpace", {
-        // Owner corresponds to user ID
-        ownerID: DataTypes.INTEGER,
-
+    const ParkingSpace = sequelize.define("ParkingSpace", {
         // Location by address string and lat/long
         address: DataTypes.STRING,
         latitude: {
@@ -22,5 +19,13 @@ module.exports = function(sequelize, DataTypes) {
         price: DataTypes.DOUBLE,
         description: DataTypes.TEXT
     });
+
+    // Set association with Users
+    const user = require("./user")(sequelize,DataTypes);
+
+    // A space has an owner(user), a user can own multiple spaces
+    ParkingSpace.belongsTo(user, {as:"owner", foreignKey: "ownerID"});
+    user.hasMany(ParkingSpace, {foreignKey:"ownerID"});
+
     return ParkingSpace;
 };
