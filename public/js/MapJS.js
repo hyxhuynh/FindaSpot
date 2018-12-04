@@ -73,6 +73,7 @@ function initMap() {
 }
 
 // Code for the address input box
+
 function initAutocomplete() {
     var input = document.getElementById("autocomplete");
     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -104,6 +105,9 @@ function initAutocomplete() {
         });
     });
 
+    function relocateMap() {
+        //Create a function that relocates the user to the address they entered in the create new pin/spot form.
+    }
 }
 
 
