@@ -50,7 +50,31 @@ module.exports = function(app) {
         console.log(spaceInfo);
 
         db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.status(201).send(response);
+            res.status(201).json(response);
+        }).catch(err => {
+
+            if (err instanceof sequelize.ForeignKeyConstraintError) {
+                console.log(err.message);
+                res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+            } else if (err instanceof sequelize.ValidationError) {
+                console.log(err.message);
+                res.status(400).send("400 BAD REQUEST:\n"+err.message);
+            } else {
+                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                throw err;
+            }
+        });
+    });
+
+    // Get parking space by id
+    app.get("/api/parkingspace/:id", function(req,res) {
+        const id = req.params.id;
+
+        // Find spaces near coordinates
+        db.ParkingSpace.findAll({
+            where: { id: id },
+        }).then( response => {
+            res.json(response);
         });
     });
 
@@ -66,7 +90,7 @@ module.exports = function(app) {
                     where: {id:id}
                 }
             ).then( function(response) {
-                res.status(200).send(response);
+                res.status(200).json(response);
             });
         } else {
             res.status(400).end();
@@ -83,26 +107,4 @@ module.exports = function(app) {
         });
     });
 
-
-
-    // Get all examples
-    app.get("/api/examples", function(req, res) {
-        db.Example.findAll({}).then(function(dbExamples) {
-            res.json(dbExamples);
-        });
-    });
-
-    // Create a new example
-    app.post("/api/examples", function(req, res) {
-        db.Example.create(req.body).then(function(dbExample) {
-            res.json(dbExample);
-        });
-    });
-
-    // Delete an example by id
-    app.delete("/api/examples/:id", function(req, res) {
-        db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-            res.json(dbExample);
-        });
-    });
 };
