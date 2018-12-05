@@ -102,6 +102,7 @@ module.exports = function(app) {
                 }
             });
         } else {
+            // Info was missing -> Bad Request
             res.status(400).send("400 BAD REQUEST: Missing information");
         }
     });
@@ -191,25 +192,32 @@ module.exports = function(app) {
         const data = req.body;
         console.log(data);
 
-        // TODO: Convert start/end dates to correctly formatted Date objects
-
-        let newSpace = {
-            parkerID: data.parkerID,
-            ParkingSpaceId: data.ParkingSpaceId,
-            reservationStart: new Date(data.reservationStart),
-            reservationEnd: new Date(data.reservationEnd)
-        };
+        let newSpace = {};
+        newSpace.parkerID = data.parkerID;
+        newSpace.ParkingSpaceId = data.ParkingSpaceId;
+        if (data.reservationStart) {
+            newSpace.reservationStart = new Date(data.reservationStart);
+        }
+        if (data.reservationEnd){
+            newSpace.reservationEnd = new Date(data.reservationEnd);
+        }
 
         console.log(newSpace);
 
-        db.Reservation.create(newSpace).then( response => {
-            res.status(201).json(response);
-        }).catch(err => {
-            // If unknown error cause, rethrow error
-            res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
-            console.log(err.message);
-            throw err;
-        });
+        // Check for entry in all fields
+        if ( !isNaN(newSpace.reservationStart.getTime()) && !isNaN(newSpace.reservationEnd)){
+            db.Reservation.create(newSpace).then( response => {
+                res.status(201).json(response);
+            }).catch(err => {
+                // If unknown error cause, rethrow error
+                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                console.log(err.message);
+                throw err;
+            });
+        } else {
+            // Info was missing -> Bad Request
+            res.status(400).send("400 BAD REQUEST: Missing information");
+        }
     });
 
     // Route to delete an existing Reservation
