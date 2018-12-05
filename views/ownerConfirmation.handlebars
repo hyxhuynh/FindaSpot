@@ -14,7 +14,7 @@
 {{!-- <!--- Google API JAVASCRIP CODE---> --}}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw"></script>
 
-<form id="regForm" action="/googleMapsPage">
+<form id="regForm">
     <h4>Summary</h4>
     <!-- One "tab" for each step in the form: -->
     <!-- FIRST TAB -->
@@ -49,19 +49,8 @@
         
     </div>
 
-    <div style="overflow:auto;">
-        <div style="float:right;">
-            <button><a href="/">← Back To Home</a></button>
-        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-        </div>
-    </div>
+    <button><a href="/">← Back To Home</a></button>
 
-
-    <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align:center;margin-top:40px;">
-        <span class="step"></span>
-    </div>
 </form>
 
 {{!-- GoogleMap JS code --}}
