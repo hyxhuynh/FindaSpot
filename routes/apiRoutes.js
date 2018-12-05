@@ -49,21 +49,28 @@ module.exports = function(app) {
 
         console.log(spaceInfo);
 
-        db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.status(201).json(response);
-        }).catch(err => {
+        // Check for all required info
+        if (spaceInfo.ownerID && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
-            if (err instanceof sequelize.ForeignKeyConstraintError) {
-                console.log(err.message);
-                res.status(400).send("400 BAD REQUEST: Invalid ownerID");
-            } else if (err instanceof sequelize.ValidationError) {
-                console.log(err.message);
-                res.status(400).send("400 BAD REQUEST:\n"+err.message);
-            } else {
-                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
-                throw err;
-            }
-        });
+            // Create space with info provided
+            db.ParkingSpace.create(spaceInfo).then( function(response) {
+                res.status(201).json(response);
+            }).catch(err => {
+
+                if (err instanceof sequelize.ForeignKeyConstraintError) {
+                    console.log(err.message);
+                    res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                } else if (err instanceof sequelize.ValidationError) {
+                    console.log(err.message);
+                    res.status(400).send("400 BAD REQUEST:\n"+err.message);
+                } else {
+                    res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                    throw err;
+                }
+            });
+        } else {
+            res.status(400).end();
+        }
     });
 
     // Get parking space by id
