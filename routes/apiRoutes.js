@@ -154,7 +154,11 @@ module.exports = function(app) {
 
     // Route to get existing reservations
     app.get("/api/reservation", (req, res) => {
-        res.end();
+        // TODO: Add filtering to return only desired Reservations
+
+        db.Reservation.findAll().then( response => {
+            res.json(response);
+        });
     });
 
     // Route to create new Reservation on a ParkingSpace
