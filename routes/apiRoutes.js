@@ -4,6 +4,12 @@ const Op =sequelize.Op;
 
 module.exports = function(app) {
 
+    /***************************************
+     *
+     * API ROUTES for ParkingSpaces
+     *
+     ***************************************/
+
     // Get parking spaces near location
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
@@ -88,7 +94,6 @@ module.exports = function(app) {
                         res.status(500).send("500 INTERNAL SERVER ERROR: Unknown DatabaseError");
                         throw err;
                     }
-                    
                 } else {
                     res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
                     console.log(err.message);
@@ -141,4 +146,24 @@ module.exports = function(app) {
         });
     });
 
+    /***************************************
+     *
+     * API ROUTES for Reservations
+     *
+     ***************************************/
+
+    // Route to get existing reservations
+    app.get("/api/reservation", (req, res) => {
+        res.end();
+    });
+
+    // Route to create new Reservation on a ParkingSpace
+    app.post("/api/reservation", (req, res) => {
+        res.end();
+    });
+
+    // Route to delete an existing Reservation
+    app.delete("/api/reservation/:id", (req, res) => {
+        res.end();
+    });
 };
