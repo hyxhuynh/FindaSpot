@@ -156,7 +156,31 @@ module.exports = function(app) {
     app.get("/api/reservation", (req, res) => {
         // TODO: Add filtering to return only desired Reservations
 
-        db.Reservation.findAll().then( response => {
+        db.Reservation.findAll({
+            include: [
+                {
+                    // Include inforation for user that placed the reservation
+                    model: db.user, as: "parker",
+                    // Attributes filters out to provide only relevant data so as to not include password, etc.
+                    attributes: ["firstname","lastname","email"]
+                },{
+                    // Include inforation for user that placed the reservation
+                    model: db.ParkingSpace,
+                    // Attributes filters out to provide only relevant data
+                    attributes: {
+                        exclude: ["createdAt","updatedAt"],
+                        include: [
+                            // {
+                            //     // Include inforation for user that placed the reservation
+                            //     model: db.user, as: "parker",
+                            //     // Attributes filters out to provide only relevant data so as to not include password, etc.
+                            //     attributes: ["firstname","lastname","email"]
+                            // }
+                        ]
+                    }
+                }
+            ]
+        }).then( response => {
             res.json(response);
         });
     });
