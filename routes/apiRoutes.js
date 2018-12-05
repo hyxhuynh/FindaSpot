@@ -169,15 +169,16 @@ module.exports = function(app) {
                     // Attributes filters out to provide only relevant data
                     attributes: {
                         exclude: ["createdAt","updatedAt"],
-                        include: [
-                            // {
-                            //     // Include inforation for user that placed the reservation
-                            //     model: db.user, as: "parker",
-                            //     // Attributes filters out to provide only relevant data so as to not include password, etc.
-                            //     attributes: ["firstname","lastname","email"]
-                            // }
-                        ]
-                    }
+                        
+                    },
+                    include: [
+                        {
+                            // Include inforation for user that placed the reservation
+                            model: db.user, as: "owner",
+                            // Attributes filters out to provide only relevant data so as to not include password, etc.
+                            attributes: ["firstname","lastname","email"]
+                        }
+                    ]
                 }
             ]
         }).then( response => {
