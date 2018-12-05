@@ -91,7 +91,7 @@ function initAutocomplete() {
 
         $.ajax({
             type: "GET",
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
         }).then(function (result) {
             // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
             newAddressLat = result.results[0].geometry.location.lat;
@@ -105,14 +105,14 @@ function initAutocomplete() {
 
             $.post({
                 url: "/api/parkingspace",
-                data: {};
+                data: {}; // get information from user model and post that information to the database.
             });
             // $.ajax({
             //     type: "GET",
             //     url: url + lat + lng
             // }).then(function (data) {
             //     console.log("data ", data);
-            // });
+            // }); 
             var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
                 content: "<h6>That new pin though :)</h6>"};
             // push new marker obj to the arry of markers

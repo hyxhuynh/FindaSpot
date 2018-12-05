@@ -16,6 +16,11 @@ module.exports = function(app) {
     });
 
     // Render Driver Application page
+    app.get("/chooseProfile", function(req, res) {
+        res.render("chooseProfile");
+    });
+
+    // Render Driver Application page
     app.get("/googleMapsPage", function(req, res) {
         res.render("googleMaps");
     });
