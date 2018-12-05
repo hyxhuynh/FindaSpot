@@ -222,6 +222,12 @@ module.exports = function(app) {
 
     // Route to delete an existing Reservation
     app.delete("/api/reservation/:id", (req, res) => {
-        res.end();
+        const id = req.params.id;
+
+        db.Reservation.destroy({
+            where: {id:id}
+        }).then( response => {
+            res.json(response);
+        });
     });
 };
