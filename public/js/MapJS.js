@@ -27,6 +27,8 @@ var markers =[
         content: "<h6>Status: Not available<br>Location: Apt parking <br>Max usage: 48 hours</h6>"}
 ];
 
+
+
 var map;
 //Add a marker from the markers array above
 function addMarker(props) {
@@ -58,7 +60,7 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(function (currentPosition) {
         var userLat = currentPosition.coords.latitude;
         var userLng = currentPosition.coords.longitude;
-        console.log(userLat, userLng);
+        console.log("Initmap ",userLat, userLng);
         var options = {
             zoom: 13,
             center: {lat: userLat, lng: userLng}
@@ -74,6 +76,9 @@ function initMap() {
 
 // Code for the address input box
 
+var newAddressLat;
+var newAddressLng;
+
 function initAutocomplete() {
     var input = document.getElementById("autocomplete");
     var autocomplete = new google.maps.places.Autocomplete(input);
@@ -86,13 +91,28 @@ function initAutocomplete() {
 
         $.ajax({
             type: "GET",
-            url: "https://maps.googleapis.com/maps/api/geocode/json?address="+userAddress+"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk"
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
         }).then(function (result) {
             // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
-            var newAddressLat = result.results[0].geometry.location.lat;
-            var newAddressLng = result.results[0].geometry.location.lng;
+            newAddressLat = result.results[0].geometry.location.lat;
+            newAddressLng = result.results[0].geometry.location.lng;
+            console.log("Lat: ", newAddressLat, " Lng: ", newAddressLng);
             // Create an obj with the coords and info from the create spot form and push that obj to the database/arrry so that it can be passed
             // into the addMarker function
+            var url = "/api/parkingspace?";
+            var lat = `lat=${newAddressLat}`;
+            var lng = `&long=${newAddressLng}`;
+
+            $.post({
+                url: "/api/parkingspace",
+                data: {};
+            });
+            // $.ajax({
+            //     type: "GET",
+            //     url: url + lat + lng
+            // }).then(function (data) {
+            //     console.log("data ", data);
+            // });
             var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
                 content: "<h6>That new pin though :)</h6>"};
             // push new marker obj to the arry of markers
@@ -104,10 +124,6 @@ function initAutocomplete() {
 
         });
     });
-
-    function relocateMap() {
-        //Create a function that relocates the user to the address they entered in the create new pin/spot form.
-    }
 }
 
 

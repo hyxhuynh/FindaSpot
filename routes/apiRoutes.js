@@ -5,6 +5,7 @@ const Op =sequelize.Op;
 module.exports = function(app) {
 
     // Get parking spaces near location
+    // GET will Giving me information back
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
         const targLatitude = parseFloat(req.query.lat);
@@ -38,7 +39,7 @@ module.exports = function(app) {
                 res.json(response);
             });
         } else {
-            res.status(400).end();
+            res.status(404).end();
         }
 
     });
