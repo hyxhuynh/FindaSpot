@@ -95,6 +95,7 @@ module.exports = function(app) {
                         throw err;
                     }
                 } else {
+                    // Else unknown error cause, rethrow error
                     res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
                     console.log(err.message);
                     throw err;
@@ -169,7 +170,6 @@ module.exports = function(app) {
                     // Attributes filters out to provide only relevant data
                     attributes: {
                         exclude: ["createdAt","updatedAt"],
-                        
                     },
                     include: [
                         {
@@ -188,7 +188,18 @@ module.exports = function(app) {
 
     // Route to create new Reservation on a ParkingSpace
     app.post("/api/reservation", (req, res) => {
-        res.end();
+        const newSpace = req.body;
+
+        // TODO: Convert start/end dates to correctly formatted Date objects
+
+        db.Reservation.create(newSpace).then( response => {
+            res.status(201).json(response);
+        }).catch(err => {
+            // If unknown error cause, rethrow error
+            res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+            console.log(err.message);
+            throw err;
+        });
     });
 
     // Route to delete an existing Reservation
