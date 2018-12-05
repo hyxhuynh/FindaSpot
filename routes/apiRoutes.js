@@ -46,11 +46,34 @@ module.exports = function(app) {
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
-
+        // sample req.body
+        //{
+        // ownerID: 1,
+        // address: 1325 4th ave,
+        // city: Seattle,
+        // state: WA,
+        // postalCode: 98101,
+        // latitude: 45.45,
+        // longitude: 47.89,
+        // spaceSize: "standard"
+        // spaceCover: "garage",
+        // price: "10",
+        // description: "sample description"
+        //}
         console.log(spaceInfo);
 
-        db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.status(201).send(response);
+        db.ParkingSpace.create(spaceInfo).then(function(data) {
+            // if(err){
+            //     throw err;
+            // }
+            console.log("PARKING SPACE DATA", data);
+            // redirect to the /owner/confirmation route
+            const url = require("url");
+            res.redirect(url.format({
+                pathname:"/owner/confirmation",
+                query: data.dataValues
+            }));
+            // res.status(201).send(response);
         });
     });
 

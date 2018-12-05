@@ -27,15 +27,16 @@ module.exports = function(app) {
 
     // Render Owner Application page
     app.get("/owner/confirmation", function(req, res) {
+        console.log("REQ.QUERY", req.query);
         res.render("ownerConfirmation", {
-            addressLineOne: req.query["address-line1"],
-            addressLineTwo: req.query["address-line2"],
+            address: req.query.address,
             city: req.query.city,
-            region: req.query.region,
-            postalCode: req.query["postal-code"],
-            type: req.query.parkingSpotType,
-            size: req.query.parkingSpotSize,
-            description: req.query.parkingSpotDesc,
+            state: req.query.state,
+            postalCode: req.query.postalCode,
+            price: req.query.price,
+            spaceCover: req.query.spaceCover,
+            spaceSize: req.query.spaceSize,
+            description: req.query.description,
             ownerName: req.query.ownerName,
             ownerPhone: req.query.ownerPhone,
             ownerEmail: req.query.ownerEmail
