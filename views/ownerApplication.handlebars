@@ -5,37 +5,29 @@
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-<link href="/styles/dateTimePickerStyle.css" rel="stylesheet">
-<link href="/styles/materialize.css" rel="stylesheet">
+{{!-- <link href="/styles/dateTimePickerStyle.css" rel="stylesheet"> --}}
+{{!-- <link href="/styles/materialize.css" rel="stylesheet"> --}}
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<form id="regForm" action="/owner/confirmation">
+<form id="regForm" method="POST" action="/api/parkingspace">
     <h4>List Your Parking Space</h4>
     <!-- One "tab" for each step in the form: -->
     <!-- FIRST TAB -->
     <div class="tab">
         <h5>Enter Your Address</h5>
 
-        <!-- address-line1 input-->
+        <!-- address input-->
         <div class="control-group">
-                <label class="control-label">Address Line 1</label>
+                <label class="control-label">Address</label>
                 <div class="controls">
-                    <input id="address-line1" name="address-line1" type="text" placeholder="address line 1"
+                    <input id="address" name="address" type="text" placeholder="address line 1"
                     class="input-xlarge">
                     <p class="help-block">Street address, P.O. box, company name, c/o</p>
                 </div>
             </div>
-            <!-- address-line2 input-->
-            <div class="control-group">
-                <label class="control-label">Address Line 2</label>
-                <div class="controls">
-                    <input id="address-line2" name="address-line2" type="text" placeholder="address line 2"
-                    class="input-xlarge">
-                    <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
-                </div>
-            </div>
+
             <!-- city input-->
             <div class="control-group">
                 <label class="control-label">City / Town</label>
@@ -48,7 +40,7 @@
             <div class="control-group">
                 <label class="control-label">State / Province / Region</label>
                 <div class="controls">
-                    <input id="region" name="region" type="text" placeholder="state / province / region"
+                    <input id="state" name="state" type="text" placeholder="state / province / region"
                     class="input-xlarge">
                     <p class="help-block"></p>
                 </div>
@@ -57,7 +49,7 @@
             <div class="control-group">
                 <label class="control-label">Zip / Postal Code</label>
                 <div class="controls">
-                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
+                    <input id="postalCode" name="postalCode" type="text" placeholder="zip or postal code"
                     class="input-xlarge">
                     <p class="help-block"></p>
                 </div>
@@ -69,16 +61,15 @@
         <p>
             Customer will go to your posted location. Adjust the pin to match your parking space exact location.
         </p>
-        <!-- <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
-        <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p> -->
+
     </div>
     <!-- THIRD TAB -->
     <div class="tab">
             <h5>Parking Space</h5>
-            <p>Where is your parking location?<input placeholder="Note for developer: This should display address enter previously." name="location" ></p>
-            <p>Which type of parking space do you have?<input placeholder="Garage or Outdoor" name="parkingSpotType" ></p>
-            <p>What size is your parking space?<input placeholder="Compact or Regular" name="parkingSpotSize" ></p>
-            <p>Additional description of the Parking Space:<input placeholder="Type here" name="parkingSpotDesc" ></p>
+            <p>How much is the cost per day?<input placeholder="price" name="price" ></p>
+            <p>Which type of parking space do you have?<input placeholder="uncovered, covered, garage" name="spaceCover" ></p>
+            <p>What size is your parking space?<input placeholder="standard,compact, motorcycle, rv" name="spaceSize" ></p>
+            <p>Additional description of the Parking Space:<input placeholder="Type here" name="description" ></p>
     </div>
     <!-- FOURTH TAB -->
     <div class="tab">
@@ -102,7 +93,14 @@
     </div>
 </form>
 
+
+{{!-- GoogleMap JS code --}}
+<script src="/js/MapJS.js"></script>
+
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script> 
+
 <!-- JavaScript/jQuery -->
 <script src="/js/application.js"></script>
-<script src="/js/materialize.js"></script>
+{{!-- <script src="/js/materialize.js"></script> --}}
 <script src="/js/daysCalculation.js"></script>
