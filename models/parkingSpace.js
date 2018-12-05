@@ -14,5 +14,6 @@ module.exports = function(sequelize, DataTypes) {
         price: DataTypes.DOUBLE,
         description: DataTypes.TEXT
     });
+
     return ParkingSpace;
 };
