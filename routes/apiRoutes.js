@@ -188,9 +188,19 @@ module.exports = function(app) {
 
     // Route to create new Reservation on a ParkingSpace
     app.post("/api/reservation", (req, res) => {
-        const newSpace = req.body;
+        const data = req.body;
+        console.log(data);
 
         // TODO: Convert start/end dates to correctly formatted Date objects
+
+        let newSpace = {
+            parkerID: data.parkerID,
+            ParkingSpaceId: data.ParkingSpaceId,
+            reservationStart: new Date(data.reservationStart),
+            reservationEnd: new Date(data.reservationEnd)
+        };
+
+        console.log(newSpace);
 
         db.Reservation.create(newSpace).then( response => {
             res.status(201).json(response);
