@@ -10,8 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     const ParkingSpace = require("./ParkingSpace")(sequelize,DataTypes);
 
     // A Reservation has a parker (user), a user can make multiple Reservations
-    Reservation.belongsTo(user, {as:"parker", foreignKey: "parkerID"});
-    user.hasMany(Reservation, {foreignKey:"parkerID"});
+    Reservation.belongsTo(user, {as:"parker", foreignKey: "parkerId"});
+    user.hasMany(Reservation, {foreignKey:"parkerId"});
 
     // A Reservation has a ParkingSpace, a ParkingSpace can have multiple Reservations
     Reservation.belongsTo(ParkingSpace);

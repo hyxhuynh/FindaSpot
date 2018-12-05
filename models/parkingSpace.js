@@ -24,8 +24,8 @@ module.exports = function(sequelize, DataTypes) {
     const user = require("./user")(sequelize,DataTypes);
 
     // A space has an owner(user), a user can own multiple spaces
-    ParkingSpace.belongsTo(user, {as:"owner", foreignKey: "ownerID"});
-    user.hasMany(ParkingSpace, {foreignKey:"ownerID"});
+    ParkingSpace.belongsTo(user, {as:"owner", foreignKey: "ownerId"});
+    user.hasMany(ParkingSpace, {foreignKey:"ownerId"});
 
     return ParkingSpace;
 };

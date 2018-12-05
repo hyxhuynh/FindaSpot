@@ -196,7 +196,7 @@ module.exports = function(app) {
         let newReservation = {};
 
         // Set ID references for parker(user) and ParkingSpace
-        newReservation.parkerID = data.parkerID;
+        newReservation.parkerId = data.parkerId;
         newReservation.ParkingSpaceId = data.ParkingSpaceId;
 
         // Check for reservationStart time, format to Date, otherwise give error response
