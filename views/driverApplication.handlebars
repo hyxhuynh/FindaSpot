@@ -1,6 +1,8 @@
 
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
 
+
+
 <!-- Date and Time picker -->
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,7 +13,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<form id="regForm" action="/results_page_here">
+<form id="regForm" action="/googleMapsPage">
     <h3>Your Chosen Parking Space</h3>
     <br>
     <!-- FIRST TAB -->
@@ -42,7 +44,7 @@
     </div>
     <!-- SECOND TAB -->
     <div class="tab">General Location
-        <p><input placeholder="City, State, Zipcode" name="location"></p>
+        <p><input placeholder="City, State, Zipcode" name="location" id="autocomplete"></p>
     </div>
     <!-- THIRD TAB -->
     <div class="tab">Parking Spot Description
@@ -84,6 +86,12 @@
 
     </div>
 </form>
+
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script> 
+
+{{!-- GoogleMap JS code --}}
+<script src="/js/MapJS.js"></script>
 
 <script src="/js/application.js"></script>
 <script src="/js/materialize.js"></script>
