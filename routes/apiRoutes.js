@@ -62,8 +62,8 @@ module.exports = function(app) {
         //}
         console.log(spaceInfo);
 
-        db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.status(201).json(response);
+        db.ParkingSpace.create(spaceInfo).then( function(data) {
+            
             console.log("PARKING SPACE DATA", data);
             // redirect to the /owner/confirmation route
             const url = require("url");
