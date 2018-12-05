@@ -58,18 +58,45 @@ module.exports = function(app) {
             }).catch(err => {
 
                 if (err instanceof sequelize.ForeignKeyConstraintError) {
-                    console.log(err.message);
-                    res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                    // Handles errors with key constraints
+                    let msg = err.message;
+                    console.log(msg);
+
+                    if (msg.includes("ownerID")) {
+                        res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                    } else {
+                        // Else unknown error cause, rethrow error
+                        res.status(500).send("500 INTERNAL SERVER ERROR: Unknown ForeignKeyConstraintError");
+                        throw err;
+                    }
                 } else if (err instanceof sequelize.ValidationError) {
+                    // Handles validation errors
                     console.log(err.message);
                     res.status(400).send("400 BAD REQUEST:\n"+err.message);
+                } else if (err instanceof sequelize.DatabaseError) {
+                    let msg = err.message;
+                    console.log(msg);
+
+                    if (msg.includes("spaceSize")) {
+                        // Error in setting spaceSize field
+                        res.status(400).send("400 BAD REQUEST: spaceSize must be one of \"standard\", \"compact\",\"motorcycle\", \"rv\"");
+                    } else if (msg.includes("spaceCover")) {
+                        // Error in setting spaceCover field
+                        res.status(400).send("400 BAD REQUEST: spaceCover must be one of \"uncovered\", \"covered\",\"garage\"");
+                    } else {
+                        // Else unknown error cause, rethrow error
+                        res.status(500).send("500 INTERNAL SERVER ERROR: Unknown DatabaseError");
+                        throw err;
+                    }
+                    
                 } else {
                     res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                    console.log(err.message);
                     throw err;
                 }
             });
         } else {
-            res.status(400).end();
+            res.status(400).send("400 BAD REQUEST: Missing information");
         }
     });
 
