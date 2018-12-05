@@ -4,6 +4,12 @@ const Op =sequelize.Op;
 
 module.exports = function(app) {
 
+    /***************************************
+     *
+     * API ROUTES for ParkingSpaces
+     *
+     ***************************************/
+
     // Get parking spaces near location
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
@@ -49,21 +55,56 @@ module.exports = function(app) {
 
         console.log(spaceInfo);
 
-        db.ParkingSpace.create(spaceInfo).then( function(response) {
-            res.status(201).json(response);
-        }).catch(err => {
+        // Check for all required info
+        if (spaceInfo.ownerID && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
-            if (err instanceof sequelize.ForeignKeyConstraintError) {
-                console.log(err.message);
-                res.status(400).send("400 BAD REQUEST: Invalid ownerID");
-            } else if (err instanceof sequelize.ValidationError) {
-                console.log(err.message);
-                res.status(400).send("400 BAD REQUEST:\n"+err.message);
-            } else {
-                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
-                throw err;
-            }
-        });
+            // Create space with info provided
+            db.ParkingSpace.create(spaceInfo).then( function(response) {
+                res.status(201).json(response);
+            }).catch(err => {
+
+                if (err instanceof sequelize.ForeignKeyConstraintError) {
+                    // Handles errors with key constraints
+                    let msg = err.message;
+                    console.log(msg);
+
+                    if (msg.includes("ownerID")) {
+                        res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                    } else {
+                        // Else unknown error cause, rethrow error
+                        res.status(500).send("500 INTERNAL SERVER ERROR: Unknown ForeignKeyConstraintError");
+                        throw err;
+                    }
+                } else if (err instanceof sequelize.ValidationError) {
+                    // Handles validation errors
+                    console.log(err.message);
+                    res.status(400).send("400 BAD REQUEST:\n"+err.message);
+                } else if (err instanceof sequelize.DatabaseError) {
+                    let msg = err.message;
+                    console.log(msg);
+
+                    if (msg.includes("spaceSize")) {
+                        // Error in setting spaceSize field
+                        res.status(400).send("400 BAD REQUEST: spaceSize must be one of \"standard\", \"compact\",\"motorcycle\", \"rv\"");
+                    } else if (msg.includes("spaceCover")) {
+                        // Error in setting spaceCover field
+                        res.status(400).send("400 BAD REQUEST: spaceCover must be one of \"uncovered\", \"covered\",\"garage\"");
+                    } else {
+                        // Else unknown error cause, rethrow error
+                        res.status(500).send("500 INTERNAL SERVER ERROR: Unknown DatabaseError");
+                        throw err;
+                    }
+                } else {
+                    // Else unknown error cause, rethrow error
+                    res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                    console.log(err.message);
+                    throw err;
+                }
+            });
+        } else {
+            // Info was missing -> Bad Request
+            res.status(400).send("400 BAD REQUEST: Missing information");
+        }
     });
 
     // Get parking space by id
@@ -107,4 +148,80 @@ module.exports = function(app) {
         });
     });
 
+    /***************************************
+     *
+     * API ROUTES for Reservations
+     *
+     ***************************************/
+
+    // Route to get existing reservations
+    app.get("/api/reservation", (req, res) => {
+        // TODO: Add filtering to return only desired Reservations
+
+        db.Reservation.findAll({
+            include: [
+                {
+                    // Include inforation for user that placed the reservation
+                    model: db.user, as: "parker",
+                    // Attributes filters out to provide only relevant data so as to not include password, etc.
+                    attributes: ["firstname","lastname","email"]
+                },{
+                    // Include inforation for user that placed the reservation
+                    model: db.ParkingSpace,
+                    // Attributes filters out to provide only relevant data
+                    attributes: {
+                        exclude: ["createdAt","updatedAt"],
+                    },
+                    include: [
+                        {
+                            // Include inforation for user that placed the reservation
+                            model: db.user, as: "owner",
+                            // Attributes filters out to provide only relevant data so as to not include password, etc.
+                            attributes: ["firstname","lastname","email"]
+                        }
+                    ]
+                }
+            ]
+        }).then( response => {
+            res.json(response);
+        });
+    });
+
+    // Route to create new Reservation on a ParkingSpace
+    app.post("/api/reservation", (req, res) => {
+        const data = req.body;
+        console.log(data);
+
+        let newSpace = {};
+        newSpace.parkerID = data.parkerID;
+        newSpace.ParkingSpaceId = data.ParkingSpaceId;
+        if (data.reservationStart) {
+            newSpace.reservationStart = new Date(data.reservationStart);
+        }
+        if (data.reservationEnd){
+            newSpace.reservationEnd = new Date(data.reservationEnd);
+        }
+
+        console.log(newSpace);
+
+        // Check for entry in all fields
+        if ( !isNaN(newSpace.reservationStart.getTime()) && !isNaN(newSpace.reservationEnd)){
+            db.Reservation.create(newSpace).then( response => {
+                res.status(201).json(response);
+            }).catch(err => {
+                // If unknown error cause, rethrow error
+                res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
+                console.log(err.message);
+                throw err;
+            });
+        } else {
+            // Info was missing -> Bad Request
+            res.status(400).send("400 BAD REQUEST: Missing information");
+        }
+    });
+
+    // Route to delete an existing Reservation
+    app.delete("/api/reservation/:id", (req, res) => {
+        res.end();
+    });
 };
