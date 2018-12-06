@@ -2,9 +2,6 @@ module.exports = function(sequelize, DataTypes) {
     const ParkingSpace = sequelize.define("ParkingSpace", {
         // Location by address string and lat/long
         address: DataTypes.STRING,
-        city: DataTypes.STRING,
-        state: DataTypes.STRING,
-        postalCode: DataTypes.STRING,
         latitude: {
             type: DataTypes.DOUBLE,
             // Min of -90 degrees/max of 90 degrees

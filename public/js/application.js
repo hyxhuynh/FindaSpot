@@ -87,18 +87,33 @@ $("#regForm").on("submit", function (event) {
     event.preventDefault();
     console.log("FORM SUBMITTED");
 
-    const postURL = "/api/parkingspace";
-    let newSpace = {
-        ownerId: 1,
-        address: "1325 4th ave",
-        latitude: 45.45,
-        longitude: 47.89,
-        spaceSize: "standard",
-        spaceCover: "garage",
-        price: "10",
-        description: "sample description"
-    };
-    $.post(postURL, newSpace);
+    var input = document.getElementById("autocomplete");
+    var userAddress = input.value;
+    $.ajax({
+        type: "GET",
+        url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
+    }).then(result => {
+        console.log(result);
+        // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
+        newAddressLat = result.results[0].geometry.location.lat;
+        newAddressLng = result.results[0].geometry.location.lng;
+        console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
+
+        const postURL = "/api/parkingspace";
+        let newSpace = {
+            ownerId: 1,
+            address: "1325 4th ave",
+            latitude: newAddressLat,
+            longitude: newAddressLng,
+            spaceSize: "standard",
+            spaceCover: "garage",
+            price: "10",
+            description: "sample description"
+        };
+        $.post(postURL, newSpace);
+    });
+
+    
 });
 
 
