@@ -55,7 +55,7 @@ module.exports = function(app) {
         let spaceInfo = req.body;
         // sample req.body
         //{
-        // ownerID: 1,
+        // ownerId: 1,
         // address: 1325 4th ave,
         // city: Seattle,
         // state: WA,
@@ -69,9 +69,9 @@ module.exports = function(app) {
         //}
         console.log(spaceInfo);
         // TODO: I took out the following criteria below for now because we have not retrieved the information needed yet - Hy
-        // spaceInfo.ownerID && spaceInfo.latitude && spaceInfo.longitude
+        // spaceInfo.ownerId && spaceInfo.latitude && spaceInfo.longitude
         // Check for all required info
-        if (spaceInfo.address && spaceInfo.city && spaceInfo.state && spaceInfo.postalCode && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
+        if (spaceInfo.address && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
@@ -90,8 +90,8 @@ module.exports = function(app) {
                     let msg = err.message;
                     console.log(msg);
 
-                    if (msg.includes("ownerID")) {
-                        res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                    if (msg.includes("ownerId")) {
+                        res.status(400).send("400 BAD REQUEST: Invalid ownerId");
                     } else {
                         // Else unknown error cause, rethrow error
                         res.status(500).send("500 INTERNAL SERVER ERROR: Unknown ForeignKeyConstraintError");

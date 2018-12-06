@@ -71,7 +71,8 @@ function nextPrev(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
-        document.getElementById("regForm").submit();
+        // document.getElementById("regForm").submit();
+        $("#regForm").submit();
         return false;
     }
     // Otherwise, display the correct tab:
@@ -82,5 +83,22 @@ showTab(currentTab); // Display the current tab
 
 // ================ EVENT LISTENER ================
 
+$("#regForm").on("submit", function (event) {
+    event.preventDefault();
+    console.log("FORM SUBMITTED");
+
+    const postURL = "/api/parkingspace";
+    let newSpace = {
+        ownerId: 1,
+        address: "1325 4th ave",
+        latitude: 45.45,
+        longitude: 47.89,
+        spaceSize: "standard",
+        spaceCover: "garage",
+        price: "10",
+        description: "sample description"
+    };
+    $.post(postURL, newSpace);
+});
 
 
