@@ -114,6 +114,8 @@ $("#regForm").on("submit", function (event) {
         $.post(postURL, newSpace).then(response => {
             console.log("RESPONSE FROM PARKINGSPACE POST REQUEST");
             console.log(response);
+
+            window.location.href = "/owner/confirmation";
         });
     });
 
