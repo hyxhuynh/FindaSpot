@@ -72,6 +72,7 @@ module.exports = function(app) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
+                response.dataValues.redirect="HTTP://TEST";
                 res.json(response);
 
                 // Redirect was not working with AJAX POST request, using standard JSON response for now
