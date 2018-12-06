@@ -64,6 +64,33 @@
 		</div>
 	</div>
 
-    <script src="/js/index.js"></script>
+{{!-- Copy-pasted from https://getbootstrap.com/docs/4.0/components/modal/ --}} 
+<div class="container-fluid">
+	<div class="modal fade{{#if failMessage}} show" aria-hidden="false"{{else}}" aria-hidden="true"{{/if}}" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLongTitle">Oops! There was a problem!</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+		{{#if failMessage}}
+			{{#each failMessage}}
+			<p>{{this}}</p>
+			{{/each}}
+		{{/if}}
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+<script src="/js/auth.js"></script>
+
 
     

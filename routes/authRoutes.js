@@ -1,12 +1,3 @@
-
-// function signUp(req, res) {
-//     res.render('signup');
-// }
-
-// function signIn(req, res) {
-//     res.rendfer('signin');
-// }
-
 function logOut(req, res) {
     req.session.destroy(function() {
         res.redirect("/");
@@ -14,30 +5,30 @@ function logOut(req, res) {
 }
 
 function auth(req, res) {
-    res.render("auth", {});
+    var obj = {};
+    if (req.session && req.session.messages) {
+        obj.failMessage = req.session.messages;
+        delete req.session.messages;
+    }
+    res.render("auth", obj);
 }
 
 module.exports = function(app, passport) {
     app.get("/auth", auth);
-    // app.get('/signup', signUp);
-    // app.get('/signin', signIn);
-    app.post("/signup", passport.authenticate("local-signup", {
-        successRedirect: "/",
-        failureRedirect: "/auth#signup"
-    }));
+
     app.post("/register", passport.authenticate("local-register", {
         successRedirect: "/",
-        failureRedirect: "/auth#register-form"
+        successMessage: true,
+        failureRedirect: "/auth",
+        failureMessage: true//this causes the message property of the final object passed to done() in passport.js to be added to req.session.messages
     }));
-    app.post("/signin", passport.authenticate("local-signin", {
-        successRedirect: "/",
-        failureRedirect: "/auth#signin"
-    }
-    ));
+
     app.post("/login", passport.authenticate("local-login", {
-        successRedirect: "/",
-        failureRedirect: "/auth#login-form"
-    }
-    ));
+        successRedirect: "/",//not setting this causes the user to be redirected to the page they originally requested upon completion of authentication
+        successMessage: true,
+        failureRedirect: "/auth",
+        failureMessage: true//this causes the message property of the final object passed to done() in passport.js to be added to req.session.messages
+        //failureRedirect: "/auth?action-login-fail",
+    }));
     app.get("/logout", logOut);
 };
