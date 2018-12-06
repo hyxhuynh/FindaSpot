@@ -214,21 +214,32 @@ module.exports = function(app) {
         const data = req.body;
         console.log(data);
 
-        let newSpace = {};
-        newSpace.parkerID = data.parkerID;
-        newSpace.ParkingSpaceId = data.ParkingSpaceId;
+        // Create object to hold info for new Reservation
+        let newReservation = {};
+
+        // Set ID references for parker(user) and ParkingSpace
+        newReservation.parkerId = data.parkerId;
+        newReservation.ParkingSpaceId = data.ParkingSpaceId;
+
+        // Check for reservationStart time, format to Date, otherwise give error response
         if (data.reservationStart) {
-            newSpace.reservationStart = new Date(data.reservationStart);
-        }
-        if (data.reservationEnd){
-            newSpace.reservationEnd = new Date(data.reservationEnd);
+            newReservation.reservationStart = new Date(data.reservationStart);
+        } else {
+            return res.status(400).send("400 BAD REQUEST: reservationStart required");
         }
 
-        console.log(newSpace);
+        // Check for reservationEnd time, format to Date, otherwise give error response
+        if (data.reservationEnd){
+            newReservation.reservationEnd = new Date(data.reservationEnd);
+        } else {
+            return res.status(400).send("400 BAD REQUEST: reservationEnd required");
+        }
+
+        console.log(newReservation);
 
         // Check for entry in all fields
-        if ( !isNaN(newSpace.reservationStart.getTime()) && !isNaN(newSpace.reservationEnd)){
-            db.Reservation.create(newSpace).then( response => {
+        if ( !isNaN(newReservation.reservationStart.getTime()) && !isNaN(newReservation.reservationEnd)){
+            db.Reservation.create(newReservation).then( response => {
                 res.status(201).json(response);
             }).catch(err => {
                 // If unknown error cause, rethrow error
@@ -238,12 +249,18 @@ module.exports = function(app) {
             });
         } else {
             // Info was missing -> Bad Request
-            res.status(400).send("400 BAD REQUEST: Missing information");
+            res.status(400).send("400 BAD REQUEST: Impromper date format");
         }
     });
 
     // Route to delete an existing Reservation
     app.delete("/api/reservation/:id", (req, res) => {
-        res.end();
+        const id = req.params.id;
+
+        db.Reservation.destroy({
+            where: {id:id}
+        }).then( response => {
+            res.json(response);
+        });
     });
 };
