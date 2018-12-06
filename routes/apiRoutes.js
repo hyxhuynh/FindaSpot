@@ -66,9 +66,9 @@ module.exports = function(app) {
         //}
         console.log(spaceInfo);
         // TODO: I took out the following criteria below for now because we have not retrieved the information needed yet - Hy
-        // spaceInfo.ownerId && spaceInfo.latitude && spaceInfo.longitude
+        // 
         // Check for all required info
-        if (spaceInfo.address && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
+        if (spaceInfo.ownerId && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
