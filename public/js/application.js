@@ -111,7 +111,10 @@ $("#regForm").on("submit", function (event) {
             price: form.find("[name=price]").val(),
             description: form.find("[name=description]").val()
         };
-        $.post(postURL, newSpace);
+        $.post(postURL, newSpace).then(response => {
+            console.log("RESPONSE FROM PARKINGSPACE POST REQUEST")
+            console.log(response);
+        });
     });
 
 
