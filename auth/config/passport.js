@@ -1,4 +1,4 @@
-var bCrypt = require("bcrypt-nodejs"); //bCrypt is the what secures the password
+var bCrypt = require("bcrypt-nodejs"); //bCrypt is the what secures the password by hashing
 
 
 module.exports = function(passport, user) { //here we initialize our passport strategies(authentication mechanisms)
@@ -6,13 +6,13 @@ module.exports = function(passport, user) { //here we initialize our passport st
 
     var User = user; //initalize the user model
 
-    var LocalStrategy = require("passport-local").Strategy; //initialize the passport strategy (we'll customize it to our purposes later)
+    var LocalStrategy = require("passport-local").Strategy; //initialize and define the passport strategy (we'll customize it to our purposes later)
 
     //serialize //required by passport js so that a user.id is created and passport js uses this id to grab the user to authenticate
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
-    // deserialize user
+    // deserialize user -->puts it in to a format p
     passport.deserializeUser(function(id, done) {
 
         User.findById(id).then(function(user) { //uses the sequelize 'findByID' promise to grab the user and if successful starts a sequelize instance of the user model
@@ -32,7 +32,6 @@ module.exports = function(passport, user) { //here we initialize our passport st
         },
 
         function(req, email, password, done) {
-
             var generateHash = function(password) { //creates the hash password-->scrambles it
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
@@ -48,7 +47,6 @@ module.exports = function(passport, user) { //here we initialize our passport st
                     });
 
                 } else {
-
                     var userPassword = generateHash(password); //sets userPassword to the hashed password to protect info
 
                     var data = //data object for the user
@@ -72,6 +70,7 @@ module.exports = function(passport, user) { //here we initialize our passport st
         }
     ));
 
+    //first argument = a string that identifies the strategy and  the 2nd argument the new strategy
     passport.use("local-login", new LocalStrategy(
         {
             // by default, local strategy uses username and password, we will override with email
@@ -116,3 +115,4 @@ module.exports = function(passport, user) { //here we initialize our passport st
         }
     ));
 };
+
