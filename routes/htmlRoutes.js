@@ -5,6 +5,10 @@ module.exports = function(app) {
     app.get("/", auth.isLoggedIn, function(req, res) {
         res.render("chooseProfile");
     });
+    //Render profile page
+    app.get("/ownerProfile", auth.isLoggedIn, function(req, res) {
+        res.render("ownerProfile");
+    });
 
     // Render Driver Application page
     app.get("/driver/application", function(req, res) {
