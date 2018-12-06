@@ -44,8 +44,21 @@
     <div class="tab">
             <h5>Parking Space</h5>
             <p>How much is the cost per day?<input placeholder="price" name="price" ></p>
-            <p>Which type of parking space do you have?<input placeholder="uncovered, covered, garage" name="spaceCover" ></p>
-            <p>What size is your parking space?<input placeholder="standard,compact, motorcycle, rv" name="spaceSize" ></p>
+
+            <p>
+                Which type of parking space do you have?
+                <label><input type="radio" name="spaceCover" value="uncovered"><span>Uncovered</span></label>
+                <label><input type="radio" name="spaceCover" value="covered"><span>Covered</span></label>
+                <label><input type="radio" name="spaceCover" value="garage"><span>Garage</span></label>
+            </p>
+
+            <p>
+                What size is your parking space?
+                <label><input type="radio" name="spaceSize" value="standard"><span>Standard</span></label>
+                <label><input type="radio" name="spaceSize" value="compact"><span>Compact</span></label>
+                <label><input type="radio" name="spaceSize" value="motorcycle"><span>Motorcycle</span></label>
+                <label><input type="radio" name="spaceSize" value="rv"><span>RV</span></label>
+            </p>
             <p>Additional description of the Parking Space:<input placeholder="Type here" name="description" ></p>
     </div>
     <!-- FOURTH TAB -->
