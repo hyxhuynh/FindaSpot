@@ -112,7 +112,7 @@ $("#regForm").on("submit", function (event) {
             description: form.find("[name=description]").val()
         };
         $.post(postURL, newSpace).then(response => {
-            console.log("RESPONSE FROM PARKINGSPACE POST REQUEST")
+            console.log("RESPONSE FROM PARKINGSPACE POST REQUEST");
             console.log(response);
         });
     });

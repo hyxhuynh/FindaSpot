@@ -74,8 +74,8 @@ function initMap() {
 
 // Code for the address input box
 
-var newAddressLat;
-var newAddressLng;
+// var newAddressLat;
+// var newAddressLng;
 
 function initAutocomplete() {
     console.log("Trying to auto complete");
@@ -111,7 +111,7 @@ function initAutocomplete() {
     //         //     url: url + lat + lng
     //         // }).then(function (data) {
     //         //     console.log("data ", data);
-    //         // }); 
+    //         // });
     //         var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
     //             content: "<h6>That new pin though :)</h6>"};
     //         // push new marker obj to the arry of markers
