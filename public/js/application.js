@@ -116,7 +116,7 @@ $("#regForm").on("submit", function (event) {
             console.log(response);
             console.log(response.redirect);
 
-            // window.location.href = "/owner/confirmation";
+            window.location.href = response.redirect;
         });
     });
 

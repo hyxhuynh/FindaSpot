@@ -1,3 +1,4 @@
+const url = require("url");
 const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
@@ -72,14 +73,17 @@ module.exports = function(app) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
-                response.dataValues.redirect="HTTP://TEST";
+                const redirectURL = url.format({
+                    pathname:"/owner/confirmation",
+                    query: response.dataValues
+                });
+                response.dataValues.redirect=redirectURL;
                 res.json(response);
 
                 // Redirect was not working with AJAX POST request, using standard JSON response for now
 
                 // console.log("PARKING SPACE response", response);
                 // // redirect to the /owner/confirmation route
-                // const url = require("url");
                 // res.redirect(url.format({
                 //     pathname:"/owner/confirmation",
                 //     query: response.dataValues
