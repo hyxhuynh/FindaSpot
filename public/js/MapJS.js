@@ -1,4 +1,4 @@
-console.log("Linked");
+console.log("Linked to mapJS");
 
 //Google maps API key
 
@@ -26,8 +26,6 @@ var markers =[
     {coords: {lat:47.607480, lng: -122.335200},
         content: "<h6>Status: Not available<br>Location: Apt parking <br>Max usage: 48 hours</h6>"}
 ];
-
-
 
 var map;
 //Add a marker from the markers array above
@@ -80,11 +78,12 @@ var newAddressLat;
 var newAddressLng;
 
 function initAutocomplete() {
+    console.log("Trying to auto complete");
     var input = document.getElementById("autocomplete");
     var autocomplete = new google.maps.places.Autocomplete(input);
-    $("#addressButton").on("click", function(event) {
+    $("#nextBtn").on("click", function(event) {
         event.preventDefault();
-        console.log(input.value);
+        console.log("This is the obj", input.value);
         var userAddress = input.value;
 
         // AJAX call for google geolocator converter
@@ -96,17 +95,17 @@ function initAutocomplete() {
             // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
             newAddressLat = result.results[0].geometry.location.lat;
             newAddressLng = result.results[0].geometry.location.lng;
-            console.log("Lat: ", newAddressLat, " Lng: ", newAddressLng);
+            console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
             // Create an obj with the coords and info from the create spot form and push that obj to the database/arrry so that it can be passed
             // into the addMarker function
             var url = "/api/parkingspace?";
             var lat = `lat=${newAddressLat}`;
             var lng = `&long=${newAddressLng}`;
 
-            $.post({
-                url: "/api/parkingspace",
-                data: {}; // get information from user model and post that information to the database.
-            });
+            // $.post({
+            //     url: "/api/parkingspace",
+            //     data: {}; // get information from user model and post that information to the database.
+            // });
             // $.ajax({
             //     type: "GET",
             //     url: url + lat + lng
@@ -125,5 +124,3 @@ function initAutocomplete() {
         });
     });
 }
-
-
