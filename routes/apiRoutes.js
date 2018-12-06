@@ -53,6 +53,8 @@ module.exports = function(app) {
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
+        console.log(spaceInfo);
+        
         // sample req.body
         //{
         // ownerId: 1,
@@ -64,9 +66,7 @@ module.exports = function(app) {
         // price: "10",
         // description: "sample description"
         //}
-        console.log(spaceInfo);
-        // TODO: I took out the following criteria below for now because we have not retrieved the information needed yet - Hy
-        // 
+
         // Check for all required info
         if (spaceInfo.ownerId && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
