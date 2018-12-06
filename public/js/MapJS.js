@@ -81,46 +81,46 @@ function initAutocomplete() {
     console.log("Trying to auto complete");
     var input = document.getElementById("autocomplete");
     var autocomplete = new google.maps.places.Autocomplete(input);
-    $("#nextBtn").on("click", function(event) {
-        event.preventDefault();
-        console.log("This is the obj", input.value);
-        var userAddress = input.value;
+    // $("#nextBtn").on("click", function(event) {
+    //     event.preventDefault();
+    //     console.log("This is the obj", input.value);
+    //     var userAddress = input.value;
 
-        // AJAX call for google geolocator converter
+    //     // AJAX call for google geolocator converter
 
-        $.ajax({
-            type: "GET",
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
-        }).then(function (result) {
-            // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
-            newAddressLat = result.results[0].geometry.location.lat;
-            newAddressLng = result.results[0].geometry.location.lng;
-            console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
-            // Create an obj with the coords and info from the create spot form and push that obj to the database/arrry so that it can be passed
-            // into the addMarker function
-            var url = "/api/parkingspace?";
-            var lat = `lat=${newAddressLat}`;
-            var lng = `&long=${newAddressLng}`;
+    //     $.ajax({
+    //         type: "GET",
+    //         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`
+    //     }).then(function (result) {
+    //         // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
+    //         newAddressLat = result.results[0].geometry.location.lat;
+    //         newAddressLng = result.results[0].geometry.location.lng;
+    //         console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
+    //         // Create an obj with the coords and info from the create spot form and push that obj to the database/arrry so that it can be passed
+    //         // into the addMarker function
+    //         var url = "/api/parkingspace?";
+    //         var lat = `lat=${newAddressLat}`;
+    //         var lng = `&long=${newAddressLng}`;
 
-            // $.post({
-            //     url: "/api/parkingspace",
-            //     data: {}; // get information from user model and post that information to the database.
-            // });
-            // $.ajax({
-            //     type: "GET",
-            //     url: url + lat + lng
-            // }).then(function (data) {
-            //     console.log("data ", data);
-            // }); 
-            var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
-                content: "<h6>That new pin though :)</h6>"};
-            // push new marker obj to the arry of markers
-            markers.push(newMarker);
+    //         // $.post({
+    //         //     url: "/api/parkingspace",
+    //         //     data: {}; // get information from user model and post that information to the database.
+    //         // });
+    //         // $.ajax({
+    //         //     type: "GET",
+    //         //     url: url + lat + lng
+    //         // }).then(function (data) {
+    //         //     console.log("data ", data);
+    //         // }); 
+    //         var newMarker = {coords: {lat: newAddressLat, lng: newAddressLng},
+    //             content: "<h6>That new pin though :)</h6>"};
+    //         // push new marker obj to the arry of markers
+    //         markers.push(newMarker);
 
-            console.log(markers);
-            // Reload map with new markers
-            initMap();
+    //         console.log(markers);
+    //         // Reload map with new markers
+    //         initMap();
 
-        });
-    });
+    //     });
+    // });
 }
