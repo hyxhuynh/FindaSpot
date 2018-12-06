@@ -53,35 +53,36 @@ module.exports = function(app) {
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
+        console.log(spaceInfo);
+
         // sample req.body
         //{
         // ownerId: 1,
         // address: 1325 4th ave,
-        // city: Seattle,
-        // state: WA,
-        // postalCode: 98101,
         // latitude: 45.45,
         // longitude: 47.89,
-        // spaceSize: "standard"
+        // spaceSize: "standard",
         // spaceCover: "garage",
         // price: "10",
         // description: "sample description"
         //}
-        console.log(spaceInfo);
-        // TODO: I took out the following criteria below for now because we have not retrieved the information needed yet - Hy
-        // spaceInfo.ownerId && spaceInfo.latitude && spaceInfo.longitude
+
         // Check for all required info
-        if (spaceInfo.address && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
+        if (spaceInfo.ownerId && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
-                console.log("PARKING SPACE response", response);
-                // redirect to the /owner/confirmation route
-                const url = require("url");
-                res.redirect(url.format({
-                    pathname:"/owner/confirmation",
-                    query: response.dataValues
-                }));
+                res.json(response);
+
+                // Redirect was not working with AJAX POST request, using standard JSON response for now
+
+                // console.log("PARKING SPACE response", response);
+                // // redirect to the /owner/confirmation route
+                // const url = require("url");
+                // res.redirect(url.format({
+                //     pathname:"/owner/confirmation",
+                //     query: response.dataValues
+                // }));
 
             }).catch(err => {
 

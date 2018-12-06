@@ -11,6 +11,9 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+{{!-- TODO: Figure out how to add navBar partial with correct styling --}}
+{{!-- {{> navBar}} --}}
+
 <form id="regForm" method="POST" action="/api/parkingspace">
     <h4>List Your Parking Space</h4>
     <!-- One "tab" for each step in the form: -->
@@ -20,64 +23,45 @@
 
         <!-- address input-->
         <div class="control-group">
-                <label class="control-label">Address</label>
-                <div class="controls">
-                    <input id="autocomplete" id="address" name="address" type="text" placeholder="address line 1"
-                    class="input-xlarge">
-                    <p class="help-block">Street address, P.O. box, company name, c/o</p>
-                </div>
+            <label class="control-label">Address</label>
+            <div class="controls">
+                <input id="autocomplete" id="address" name="address" type="text" placeholder="address line 1"
+                class="input-xlarge">
+                <p class="help-block">Street address, P.O. box, company name, c/o</p>
             </div>
-
-            <!-- city input-->
-            <div class="control-group">
-                <label class="control-label">City / Town</label>
-                <div class="controls">
-                    <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-            <!-- region input-->
-            <div class="control-group">
-                <label class="control-label">State / Province / Region</label>
-                <div class="controls">
-                    <input id="state" name="state" type="text" placeholder="state / province / region"
-                    class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-            <!-- postal-code input-->
-            <div class="control-group">
-                <label class="control-label">Zip / Postal Code</label>
-                <div class="controls">
-                    <input id="postalCode" name="postalCode" type="text" placeholder="zip or postal code"
-                    class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
+        </div>
     </div>
-    <!-- SECOND TAB -->
+
+    {{!-- <!-- SECOND TAB -->
     <div class="tab">
         <h5>Parking Location</h5>
         <p>
             Customer will go to your posted location. Adjust the pin to match your parking space exact location.
         </p>
+    </div> --}}
 
-    </div>
     <!-- THIRD TAB -->
     <div class="tab">
             <h5>Parking Space</h5>
             <p>How much is the cost per day?<input placeholder="price" name="price" ></p>
-            <p>Which type of parking space do you have?<input placeholder="uncovered, covered, garage" name="spaceCover" ></p>
-            <p>What size is your parking space?<input placeholder="standard,compact, motorcycle, rv" name="spaceSize" ></p>
+
+            <p>
+                Which type of parking space do you have?
+                <label><input type="radio" name="spaceCover" value="uncovered"><span>Uncovered</span></label>
+                <label><input type="radio" name="spaceCover" value="covered"><span>Covered</span></label>
+                <label><input type="radio" name="spaceCover" value="garage"><span>Garage</span></label>
+            </p>
+
+            <p>
+                What size is your parking space?
+                <label><input type="radio" name="spaceSize" value="standard"><span>Standard</span></label>
+                <label><input type="radio" name="spaceSize" value="compact"><span>Compact</span></label>
+                <label><input type="radio" name="spaceSize" value="motorcycle"><span>Motorcycle</span></label>
+                <label><input type="radio" name="spaceSize" value="rv"><span>RV</span></label>
+            </p>
             <p>Additional description of the Parking Space:<input placeholder="Type here" name="description" ></p>
     </div>
-    <!-- FOURTH TAB -->
-    <div class="tab">
-        <h5>Contact Information</h5>
-        <p><input placeholder="Your Name" name="ownerName" ></p>
-        <p><input placeholder="Phone Number" name="ownerPhone" ></p>
-        <p><input placeholder="Email Address" name="ownerEmail" ></p>
-    </div>
+    
     <div style="overflow:auto;">
         <div style="float:right;">
         <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
