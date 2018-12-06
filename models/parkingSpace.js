@@ -2,6 +2,9 @@ module.exports = function(sequelize, DataTypes) {
     const ParkingSpace = sequelize.define("ParkingSpace", {
         // Location by address string and lat/long
         address: DataTypes.STRING,
+        city: DataTypes.STRING,
+        state: DataTypes.STRING,
+        postalCode: DataTypes.STRING,
         latitude: {
             type: DataTypes.DOUBLE,
             // Min of -90 degrees/max of 90 degrees
@@ -17,7 +20,10 @@ module.exports = function(sequelize, DataTypes) {
         spaceSize: DataTypes.ENUM("standard","compact","motorcycle","rv"),
         spaceCover: DataTypes.ENUM("uncovered","covered","garage"),
         price: DataTypes.DOUBLE,
-        description: DataTypes.TEXT
+        description: DataTypes.TEXT,
+        ownerName: DataTypes.TEXT,
+        ownerPhone: DataTypes.STRING,
+        ownerEmail: DataTypes.STRING
     });
 
     // Set association with Users
