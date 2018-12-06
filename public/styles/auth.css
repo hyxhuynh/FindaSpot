@@ -136,3 +136,14 @@ body {
 	background-color: #272A57;
 	border-color: #272A57;
 }
+
+.navbar-header {
+	margin: 0px;
+	background-image: url(//LogoImage/FindaLogo.JPG);
+	background-color: #272A57;
+	width: 100%;
+}
+
+.modal.show {
+	display: block;
+}
