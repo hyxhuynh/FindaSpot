@@ -84,6 +84,7 @@ showTab(currentTab); // Display the current tab
 // ================ EVENT LISTENER ================
 
 $("#regForm").on("submit", function (event) {
+    let form = $(this);
     event.preventDefault();
     console.log("FORM SUBMITTED");
 
@@ -101,19 +102,19 @@ $("#regForm").on("submit", function (event) {
 
         const postURL = "/api/parkingspace";
         let newSpace = {
-            ownerId: 1,
-            address: "1325 4th ave",
+            ownerId: 1, // Placeholder, needs to get ID of submitting user
+            address: form.find("[name=address]").val(),
             latitude: newAddressLat,
             longitude: newAddressLng,
-            spaceSize: "standard",
-            spaceCover: "garage",
-            price: "10",
-            description: "sample description"
+            spaceSize: form.find("[name=spaceSize]:checked").val(),
+            spaceCover: form.find("[name=spaceCover]:checked").val(),
+            price: form.find("[name=price]").val(),
+            description: form.find("[name=description]").val()
         };
         $.post(postURL, newSpace);
     });
 
-    
+
 });
 
 
