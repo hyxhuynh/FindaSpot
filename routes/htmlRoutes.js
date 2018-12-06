@@ -1,13 +1,9 @@
 var db = require("../models");
 var auth = require("../auth/util");
 module.exports = function(app) {
-    // Load index page
+    // Render Driver Application page
     app.get("/", auth.isLoggedIn, function(req, res) {
-        res.render("index", {
-            msg: "Welcome!",
-            examples: null,
-            loggedIn: true
-        });
+        res.render("chooseProfile");
     });
 
     // Render Driver Application page
