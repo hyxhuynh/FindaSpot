@@ -17,10 +17,7 @@ module.exports = function(sequelize, DataTypes) {
         spaceSize: DataTypes.ENUM("standard","compact","motorcycle","rv"),
         spaceCover: DataTypes.ENUM("uncovered","covered","garage"),
         price: DataTypes.DOUBLE,
-        description: DataTypes.TEXT,
-        ownerName: DataTypes.TEXT,
-        ownerPhone: DataTypes.STRING,
-        ownerEmail: DataTypes.STRING
+        description: DataTypes.TEXT
     });
 
     // Set association with Users

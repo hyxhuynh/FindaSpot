@@ -57,12 +57,9 @@ module.exports = function(app) {
         //{
         // ownerId: 1,
         // address: 1325 4th ave,
-        // city: Seattle,
-        // state: WA,
-        // postalCode: 98101,
         // latitude: 45.45,
         // longitude: 47.89,
-        // spaceSize: "standard"
+        // spaceSize: "standard",
         // spaceCover: "garage",
         // price: "10",
         // description: "sample description"
