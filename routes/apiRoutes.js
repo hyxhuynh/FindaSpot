@@ -73,22 +73,22 @@ module.exports = function(app) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
-                const redirectURL = url.format({
+
+                console.log("PARKING SPACE response", response);
+                // redirect to the /owner/confirmation route
+                res.redirect(url.format({
                     pathname:"/owner/confirmation",
                     query: response.dataValues
-                });
-                response.dataValues.redirect=redirectURL;
-                res.json(response);
+                }));
 
-                // Redirect was not working with AJAX POST request, using standard JSON response for now
+                // DEPRECATED: Was using JSON object with redirect URL to force redirect from client side after AJAX call
 
-                // console.log("PARKING SPACE response", response);
-                // // redirect to the /owner/confirmation route
-                // res.redirect(url.format({
+                // const redirectURL = url.format({
                 //     pathname:"/owner/confirmation",
                 //     query: response.dataValues
-                // }));
-
+                // });
+                // response.dataValues.redirect=redirectURL;
+                // res.json(response);
             }).catch(err => {
 
                 if (err instanceof sequelize.ForeignKeyConstraintError) {
