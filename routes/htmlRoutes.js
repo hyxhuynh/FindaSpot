@@ -21,7 +21,7 @@ module.exports = function(app) {
     });
 
     // Render Owner Application page
-    app.get("/owner/application", function(req, res) {
+    app.get("/owner/application", auth.isLoggedIn, function(req, res) {
         res.render("ownerApplication");
     });
 
