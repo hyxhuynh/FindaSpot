@@ -27,12 +27,6 @@ module.exports = function(app) {
      * maxprice | optional | number | Maximum price in dollars
      */
     app.get("/api/parkingspace", function(req,res) {
-<<<<<<< HEAD
-        console.log(userCurrentLocation);
-        console.log(req.query);
-        const targLatitude = parseFloat(req.query.lat);
-        const targLongitude = parseFloat(req.query.long);
-=======
         const query = req.query;
         console.log(query);
 
@@ -77,7 +71,6 @@ module.exports = function(app) {
             console.log("MAX ONLY");
             searchFilters.price = {[Op.lte]:maxPrice};
         }
->>>>>>> 458efbabbe23ff4f783ec160479f1462e62e24dc
 
         // If coordinates provided, search near coordinates
         if (targLatitude && targLongitude) {
