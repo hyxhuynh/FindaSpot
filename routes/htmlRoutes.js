@@ -15,10 +15,25 @@ module.exports = function(app) {
         res.render("driverApplication");
     });
 
-    // Render Driver Application page
+    // TODO:
+    // Render Maps page
     app.get("/googleMapsPage", function(req, res) {
-        res.render("googleMaps");
+        db.ParkingSpace.findAll({}).then(function(dbParkingSpaces) {
+            res.render("googleMaps", {
+                spaces: dbParkingSpaces,
+            });
+        });
     });
+
+    // Load space details page and pass in a parking spot by id
+    app.get("/googleMapsPage/:id", function(req, res) {
+        db.ParkingSpace.findOne({ where: { id: req.params.id } }).then(function(dbParkingSpaces) {
+            res.render("googleMaps", {
+                spaces: dbParkingSpaces
+            });
+        });
+    });
+
 
     // Render Owner Application page
     app.get("/owner/application", function(req, res) {
@@ -30,9 +45,6 @@ module.exports = function(app) {
         console.log("REQ.QUERY", req.query);
         res.render("ownerConfirmation", {
             address: req.query.address,
-            city: req.query.city,
-            state: req.query.state,
-            postalCode: req.query.postalCode,
             price: req.query.price,
             spaceCover: req.query.spaceCover,
             spaceSize: req.query.spaceSize,

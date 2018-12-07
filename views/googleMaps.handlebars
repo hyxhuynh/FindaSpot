@@ -44,9 +44,39 @@
 
 {{!-- <!--Parking Spots div and Map div--> --}}
     <div id="wrapper">
-        <div id="aviSpotsTable"></div>
+        <div id="aviSpotsTable">
+          <div id="cardSection" class="row container">
+            <div class="col-md-4 d-flex justify-content-center mb-2">
+                <div class="card" style="width: 18rem;">
+                    <div>
+                    <img class="card-img-top" src="" alt="">
+                </div>
+                    <div id="eventCard" class="card-body">
+                        <h5 class="card-title">Parking Spot</h5>
+                        <p class="card-text">Description</p>
+                        
+                        <div id="availableSpace" class="resultList">
+                          <h3>Available Parking Spots:</h3>
+                          <ul id="parking-space-list" class="list-group">
+                            {{#each spaces}}
+                            <li data-id="{{this.id}}" class="list-group-item">
+                              <a href="googleMapsPage/{{this.id}}">
+                                {{this.address}}
+                              </a>
+                            </li>
+                            {{/each}}
+                          </ul>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
         <div id="map" class="mapRight"></div>
     </div>
+
+
+
 
     {{!-- <!--- Google API JAVASCRIP CODE---> --}}
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>

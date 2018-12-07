@@ -245,4 +245,21 @@ module.exports = function(app) {
     app.delete("/api/reservation/:id", (req, res) => {
         res.end();
     });
+
+    app.get("/api/parkingSpaces/filter",(req,res) => {
+        console.log(req.query);
+        const targLatitude = parseFloat(req.query.lat);
+        const targLongitude = parseFloat(req.query.long);
+        db.ParkingSpace.findAll({
+            where: {
+                // Limit results to within 1 degree of lat/long provided
+                latitude: {
+                    [Op.between]: [(targLatitude-1), (targLatitude+1)]
+                },
+                longitude: {
+                    [Op.between]: [targLongitude-1, targLongitude+1]
+                }
+            },
+        });
+    });
 };
