@@ -1,4 +1,15 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<a href="/googleMapsPage"><button type="button" class="btn btn-primary btn-lg btn-block">FindaSpot</button></a>
-<a href="/ownerProfile"><button type="button" class="btn btn-secondary btn-lg btn-block">AddaSpot</button></a>
+{{!-- Bootstrap CSS --}}
+{{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{{!-- Linked CSS style sheet --}}
+<link rel="stylesheet" href="/styles/googleStyles.css">
+ {{> navBar}}
+<link rel="stylesheet" href="/styles/chooseProfileButtons.css">
+<div class="container">
+    <div id="buttonDiv">
+        <a href="/googleMapsPage"><button type="button" class="btn btn-primary btn-lg btn-block" id="findButton">FindaSpot</button></a>
+        <br>
+        <a href="/ownerProfile"><button type="button" class="btn btn-secondary btn-lg btn-block" id="addSpotButton">AddaSpot</button></a>
+    </div>
+</div>
+

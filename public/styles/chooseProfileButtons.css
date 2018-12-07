@@ -1,0 +1,23 @@
+#buttonDiv {
+    margin-top: 25%;
+}
+
+#findButton {
+    background-color: #272A57;
+    border-color: black;
+
+}
+
+#addSpotButton {
+    background-color: #B1D3FE;
+    color: black;
+    border-color: black;
+}
+
+body {
+    background-image: url("../images/asphalt-auto-autumn-327236.jpg");
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

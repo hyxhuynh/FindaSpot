@@ -5,6 +5,7 @@
 
 #navBackground {
     background-color: #272A57;
+    border-bottom: solid black 2px;
 }
 
 .navbar-brand {
