@@ -71,7 +71,8 @@ function nextPrev(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
-        document.getElementById("regForm").submit();
+        // document.getElementById("regForm").submit();
+        $("#regForm").submit();
         return false;
     }
     // Otherwise, display the correct tab:
@@ -82,5 +83,68 @@ showTab(currentTab); // Display the current tab
 
 // ================ EVENT LISTENER ================
 
+$("#regForm").on("submit", function (event) {
+    // Prevent default form submission to add more information before submitting
+    event.preventDefault();
+
+    let form = $(this);
+
+    console.log("FORM SUBMITTED");
+
+    var input = document.getElementById("autocomplete");
+    var userAddress = input.value;
+    $.ajax({
+        type: "GET",
+        url: `https://maps.googleapis.com/maps/api/geocode/json?address=${userAddress}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`,
+        success: function (result) {
+            console.log(result);
+            // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
+            let newAddressLat = result.results[0].geometry.location.lat;
+            let newAddressLng = result.results[0].geometry.location.lng;
+            console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
+
+            let additionalFormData ={
+                // TODO: Get correct ownerId for submitting user
+                "ownerId": 1,
+                "latitude": newAddressLat,
+                "longitude": newAddressLng
+            };
+
+            for (param in additionalFormData) {
+                form.append($("<input>", {
+                    type: "hidden",
+                    name: param,
+                    value: additionalFormData[param]
+                }));
+            }
+
+            // Use form[0] to call JS native submit() on form instead of $.submit() to prevent infinite loop
+            form[0].submit();
+
+            // Deprecated: Originally was using AJAX method to handle redirect instead of letting the server handle it
+
+            // const postURL = "/api/parkingspace";
+            // let newSpace = {
+            //     ownerId: 1, // Placeholder, needs to get ID of submitting user
+            //     address: form.find("[name=address]").val(),
+            //     latitude: newAddressLat,
+            //     longitude: newAddressLng,
+            //     spaceSize: form.find("[name=spaceSize]:checked").val(),
+            //     spaceCover: form.find("[name=spaceCover]:checked").val(),
+            //     price: form.find("[name=price]").val(),
+            //     description: form.find("[name=description]").val()
+            // };
+            // $.post(postURL, newSpace).then(response => {
+            //     console.log("RESPONSE FROM PARKINGSPACE POST REQUEST");
+            //     console.log(response);
+            //     console.log(response.redirect);
+
+            //     window.location.href = response.redirect;
+            // });
+        }
+    });
+
+
+});
 
 

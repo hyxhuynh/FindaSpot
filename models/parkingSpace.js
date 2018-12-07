@@ -2,9 +2,6 @@ module.exports = function(sequelize, DataTypes) {
     const ParkingSpace = sequelize.define("ParkingSpace", {
         // Location by address string and lat/long
         address: DataTypes.STRING,
-        city: DataTypes.STRING,
-        state: DataTypes.STRING,
-        postalCode: DataTypes.STRING,
         latitude: {
             type: DataTypes.DOUBLE,
             // Min of -90 degrees/max of 90 degrees
@@ -20,18 +17,15 @@ module.exports = function(sequelize, DataTypes) {
         spaceSize: DataTypes.ENUM("standard","compact","motorcycle","rv"),
         spaceCover: DataTypes.ENUM("uncovered","covered","garage"),
         price: DataTypes.DOUBLE,
-        description: DataTypes.TEXT,
-        ownerName: DataTypes.TEXT,
-        ownerPhone: DataTypes.STRING,
-        ownerEmail: DataTypes.STRING
+        description: DataTypes.TEXT
     });
 
     // Set association with Users
     const user = require("./user")(sequelize,DataTypes);
 
     // A space has an owner(user), a user can own multiple spaces
-    ParkingSpace.belongsTo(user, {as:"owner", foreignKey: "ownerID"});
-    user.hasMany(ParkingSpace, {foreignKey:"ownerID"});
+    ParkingSpace.belongsTo(user, {as:"owner", foreignKey: "ownerId"});
+    user.hasMany(ParkingSpace, {foreignKey:"ownerId"});
 
     return ParkingSpace;
 };

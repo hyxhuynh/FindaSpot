@@ -1,3 +1,4 @@
+const url = require("url");
 const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
@@ -11,6 +12,7 @@ module.exports = function(app) {
      ***************************************/
 
     // Get parking spaces near location
+    // GET will Giving me information back
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
         const targLatitude = parseFloat(req.query.lat);
@@ -44,7 +46,7 @@ module.exports = function(app) {
                 res.json(response);
             });
         } else {
-            res.status(400).end();
+            res.status(404).end();
         }
 
     });
@@ -52,36 +54,41 @@ module.exports = function(app) {
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
+        console.log(spaceInfo);
+
         // sample req.body
         //{
-        // ownerID: 1,
+        // ownerId: 1,
         // address: 1325 4th ave,
-        // city: Seattle,
-        // state: WA,
-        // postalCode: 98101,
         // latitude: 45.45,
         // longitude: 47.89,
-        // spaceSize: "standard"
+        // spaceSize: "standard",
         // spaceCover: "garage",
         // price: "10",
         // description: "sample description"
         //}
-        console.log(spaceInfo);
-        // TODO: I took out the following criteria below for now because we have not retrieved the information needed yet - Hy
-        // spaceInfo.ownerID && spaceInfo.latitude && spaceInfo.longitude
+
         // Check for all required info
-        if (spaceInfo.address && spaceInfo.city && spaceInfo.state && spaceInfo.postalCode && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
+        if (spaceInfo.ownerId && spaceInfo.address && spaceInfo.latitude && spaceInfo.longitude && spaceInfo.spaceSize && spaceInfo.spaceCover && spaceInfo.price) {
 
             // Create space with info provided
             db.ParkingSpace.create(spaceInfo).then( function(response) {
+
                 console.log("PARKING SPACE response", response);
                 // redirect to the /owner/confirmation route
-                const url = require("url");
                 res.redirect(url.format({
                     pathname:"/owner/confirmation",
                     query: response.dataValues
                 }));
 
+                // DEPRECATED: Was using JSON object with redirect URL to force redirect from client side after AJAX call
+
+                // const redirectURL = url.format({
+                //     pathname:"/owner/confirmation",
+                //     query: response.dataValues
+                // });
+                // response.dataValues.redirect=redirectURL;
+                // res.json(response);
             }).catch(err => {
 
                 if (err instanceof sequelize.ForeignKeyConstraintError) {
@@ -89,8 +96,8 @@ module.exports = function(app) {
                     let msg = err.message;
                     console.log(msg);
 
-                    if (msg.includes("ownerID")) {
-                        res.status(400).send("400 BAD REQUEST: Invalid ownerID");
+                    if (msg.includes("ownerId")) {
+                        res.status(400).send("400 BAD REQUEST: Invalid ownerId");
                     } else {
                         // Else unknown error cause, rethrow error
                         res.status(500).send("500 INTERNAL SERVER ERROR: Unknown ForeignKeyConstraintError");
@@ -213,21 +220,32 @@ module.exports = function(app) {
         const data = req.body;
         console.log(data);
 
-        let newSpace = {};
-        newSpace.parkerID = data.parkerID;
-        newSpace.ParkingSpaceId = data.ParkingSpaceId;
+        // Create object to hold info for new Reservation
+        let newReservation = {};
+
+        // Set ID references for parker(user) and ParkingSpace
+        newReservation.parkerId = data.parkerId;
+        newReservation.ParkingSpaceId = data.ParkingSpaceId;
+
+        // Check for reservationStart time, format to Date, otherwise give error response
         if (data.reservationStart) {
-            newSpace.reservationStart = new Date(data.reservationStart);
-        }
-        if (data.reservationEnd){
-            newSpace.reservationEnd = new Date(data.reservationEnd);
+            newReservation.reservationStart = new Date(data.reservationStart);
+        } else {
+            return res.status(400).send("400 BAD REQUEST: reservationStart required");
         }
 
-        console.log(newSpace);
+        // Check for reservationEnd time, format to Date, otherwise give error response
+        if (data.reservationEnd){
+            newReservation.reservationEnd = new Date(data.reservationEnd);
+        } else {
+            return res.status(400).send("400 BAD REQUEST: reservationEnd required");
+        }
+
+        console.log(newReservation);
 
         // Check for entry in all fields
-        if ( !isNaN(newSpace.reservationStart.getTime()) && !isNaN(newSpace.reservationEnd)){
-            db.Reservation.create(newSpace).then( response => {
+        if ( !isNaN(newReservation.reservationStart.getTime()) && !isNaN(newReservation.reservationEnd)){
+            db.Reservation.create(newReservation).then( response => {
                 res.status(201).json(response);
             }).catch(err => {
                 // If unknown error cause, rethrow error
@@ -237,13 +255,19 @@ module.exports = function(app) {
             });
         } else {
             // Info was missing -> Bad Request
-            res.status(400).send("400 BAD REQUEST: Missing information");
+            res.status(400).send("400 BAD REQUEST: Impromper date format");
         }
     });
 
     // Route to delete an existing Reservation
     app.delete("/api/reservation/:id", (req, res) => {
-        res.end();
+        const id = req.params.id;
+
+        db.Reservation.destroy({
+            where: {id:id}
+        }).then( response => {
+            res.json(response);
+        });
     });
 
     app.get("/api/parkingSpaces/filter",(req,res) => {

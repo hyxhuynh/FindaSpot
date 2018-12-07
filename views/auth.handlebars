@@ -1,30 +1,6 @@
-{{!-- <h2>Login to your account</h2>
-<form id="signin" name="signin" method="post" action="signin">
-    <label for="email">Email Address</label>
-    <input class="text" name="email" type="text" />
-    <label for="password">Password</label>
-    <input name="password" type="password" />
-    <input class="btn" type="submit" value="Sign In" />
-</form>
-
-<h2>Create an account</h2>
-<form id="signup" name="signup" method="post" action="/signup">
-    <label for="email">Email Address</label>
-    <input class="text" name="email" type="email" />
-    <label for="firstname">Firstname</label>
-    <input name="firstname" type="text" />
-    <label for="lastname">Lastname</label>
-    <input name="lastname" type="text" />
-    <label for="password">Password</label>
-    <input name="password" type="password" />
-    <input class="btn" type="submit" value="Sign Up" />
-</form> --}}
-
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/auth.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-{{!-- new code  --}}
 
 <div class="container">
     	<div class="row justify-content-center">
@@ -39,9 +15,10 @@
 					<div class="panel-body">
 						<div class="row justify-content-center">
 							<div class="col-11">
+                                {{!-- log in form --}}
                                 <form id="login-form" action="/login" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="email" id="username" tabindex="1" class="form-control" placeholder="Username or email" value="">
+										<input type="text" name="email" id="username" tabindex="1" class="form-control" placeholder="Email" value="">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
@@ -54,29 +31,27 @@
 										</div>
 									</div>
 								</form>
+                                {{!-- register form --}}
 								<form id="register-form" action="/register" method="post" role="form" style="display: none;">
                                     <div class="form-group">
                                         <input type="firstname" name="firstname" id="firstname" tabindex="1" class="form-control" placeholder="First Name" value="">
                                     </div>
                                     <div class="form-group">
                                         <input type="lastname" name="lastname" id="lastname" tabindex="2" class="form-control" placeholder="Last Name" value="">
-                                    </div>
+                                    </div>									
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="3" class="form-control" placeholder="Username" value="">
+										<input type="email" name="email" id="email" tabindex="3" class="form-control" placeholder="Email Address" value="">
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="4" class="form-control" placeholder="Email Address" value="">
+										<input type="password" name="password" id="password" tabindex="4" class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="5" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="6" class="form-control" placeholder="Confirm Password">
+										<input type="password" name="confirm-password" id="confirm-password" tabindex="5" class="form-control" placeholder="Confirm Password">
 									</div>
 									<div class="form-group">
 										<div class="row justify-content-center">
 											<div class="col-sm-6">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="7" class="form-control btn btn-register" value="Register Now">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="6" class="form-control btn btn-register" value="Register Now">
 											</div>
 										</div>
 									</div>
@@ -89,6 +64,33 @@
 		</div>
 	</div>
 
-    <script src="/js/index.js"></script>
+{{!-- Copy-pasted from https://getbootstrap.com/docs/4.0/components/modal/ --}} 
+<div class="container-fluid">
+	<div class="modal fade{{#if failMessage}} show" aria-hidden="false"{{else}}" aria-hidden="true"{{/if}}" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLongTitle">Oops! There was a problem!</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+		{{#if failMessage}}
+			{{#each failMessage}}
+			<p>{{this}}</p>
+			{{/each}}
+		{{/if}}
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+<script src="/js/auth.js"></script>
+
 
     
