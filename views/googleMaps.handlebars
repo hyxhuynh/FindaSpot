@@ -24,8 +24,40 @@
                     <div id="eventCard" class="card-body">
                         <h5 class="card-title">Parking Spot</h5>
                         <p class="card-text">Description</p>
+
+                        <div class="row" id = "searchForm">
+                            <div class="tab dateTimeContainer">
+                                <div class="dateTime">
+                                    <div class="date">
+                                        <label for="start date">Start Date</label>
+                                        <input placeholder = "" type="text" class="datepicker" name="startDate">
+                                    </div>
+                                    
+                                    <div class="time">
+                                        <label for="arrival time">Arrival Time</label>   
+                                        <input placeholder = "" type="text" class="timepicker" name="arrivalTime">
+                                    </div>
+                                </div>
+                                  
+                                  <div class="dateTime">
+                                      <div class="date">
+                                          <label for="end date">End Date</label>
+                                          <input placeholder = "" type="text" class="datepicker" name="endDate">
+                                      </div>
+                                      <div class="time">
+                                          <label for="leaving time">Leaving Time</label>
+                                          <input placeholder = "" type="text" class="timepicker" name="leavingTime">
+                                      </div>    
+                                  </div>
+                                  <button id="searchSubmit">Submit</button>
+                              </div>
+
+                              <input id="autocomplete" class="address" type="text">Address</input>
+                              <input id="spaceCover">Cover</input>
+                              <input id="spaceSize">Size</input>
+                        </div>
                         
-                        <div id="availableSpace" class="resultList">
+                        {{!-- <div id="availableSpace" class="resultList">
                           <h3>Available Parking Spots:</h3>
                           <ul id="parking-space-list" class="list-group">
                             {{#each spaces}}
@@ -36,7 +68,7 @@
                             </li>
                             {{/each}}
                           </ul>
-                        </div> 
+                        </div>  --}}
                     </div>
                 </div>
             </div>
@@ -54,3 +86,4 @@
       async defer></script>
   {{!-- GoogleMap JS code --}}
   <script src="/js/mapJS.js"></script>
+  <script src="/js/driverPage.js"></script>

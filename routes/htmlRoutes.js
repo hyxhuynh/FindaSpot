@@ -18,7 +18,13 @@ module.exports = function(app) {
     // TODO:
     // Render Maps page
     app.get("/googleMapsPage", function(req, res) {
-        db.ParkingSpace.findAll({}).then(function(dbParkingSpaces) {
+        console.log("RESERVATION REQ.QUERY", req.query);
+        db.ParkingSpace.findAll({
+            where: {
+                spaceCover: req.query.spaceCover
+
+            }
+        }).then(function(dbParkingSpaces) {
             res.render("googleMaps", {
                 spaces: dbParkingSpaces,
             });
@@ -49,9 +55,8 @@ module.exports = function(app) {
             spaceCover: req.query.spaceCover,
             spaceSize: req.query.spaceSize,
             description: req.query.description,
-            ownerName: req.query.ownerName,
-            ownerPhone: req.query.ownerPhone,
-            ownerEmail: req.query.ownerEmail
+            firstDate: req.query.firstDate,
+            endDate: req.query.endDate
         });
     });
 

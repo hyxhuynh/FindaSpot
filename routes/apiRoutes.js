@@ -246,7 +246,15 @@ module.exports = function(app) {
         // Check for entry in all fields
         if ( !isNaN(newReservation.reservationStart.getTime()) && !isNaN(newReservation.reservationEnd)){
             db.Reservation.create(newReservation).then( response => {
-                res.status(201).json(response);
+
+
+                res.redirect(url.format({
+                    pathname:"/googleMapsPage",
+                    query: response.dataValues
+                }));
+
+                // res.status(201).json(response);
+
             }).catch(err => {
                 // If unknown error cause, rethrow error
                 res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");
@@ -267,23 +275,6 @@ module.exports = function(app) {
             where: {id:id}
         }).then( response => {
             res.json(response);
-        });
-    });
-
-    app.get("/api/parkingSpaces/filter",(req,res) => {
-        console.log(req.query);
-        const targLatitude = parseFloat(req.query.lat);
-        const targLongitude = parseFloat(req.query.long);
-        db.ParkingSpace.findAll({
-            where: {
-                // Limit results to within 1 degree of lat/long provided
-                latitude: {
-                    [Op.between]: [(targLatitude-1), (targLatitude+1)]
-                },
-                longitude: {
-                    [Op.between]: [targLongitude-1, targLongitude+1]
-                }
-            },
         });
     });
 };

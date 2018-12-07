@@ -17,6 +17,8 @@ module.exports = function(sequelize, DataTypes) {
         spaceSize: DataTypes.ENUM("standard","compact","motorcycle","rv"),
         spaceCover: DataTypes.ENUM("uncovered","covered","garage"),
         price: DataTypes.DOUBLE,
+        firstDate: DataTypes.DATE,
+        endDate: DataTypes.DATE,
         description: DataTypes.TEXT
     });
 

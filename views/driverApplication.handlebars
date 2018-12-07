@@ -13,7 +13,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<form id="regForm" method="" action="/googleMapsPage">
+<form id="regForm" method="GET" action="/googleMapsPage">
     <h3>Your Chosen Parking Space</h3>
     <br>
     <!-- FIRST TAB -->
@@ -21,23 +21,23 @@
         <div class="dateTime">
             <div class="date">
                 <label for="start date">Start Date</label>
-                <input placeholder = "" type="text" class="datepicker" name="start date">
+                <input placeholder = "" type="text" class="datepicker" name="startDate">
             </div>
             
             <div class="time">
                 <label for="arrival time">Arrival Time</label>   
-                <input placeholder = "" type="text" class="timepicker" name="arrival time">
+                <input placeholder = "" type="text" class="timepicker" name="arrivalTime">
             </div>
         </div>
         
         <div class="dateTime">
             <div class="date">
                 <label for="end date">End Date</label>
-                <input placeholder = "" type="text" class="datepicker" name="end date">
+                <input placeholder = "" type="text" class="datepicker" name="endDate">
             </div>
             <div class="time">
                 <label for="leaving time">Leaving Time</label>
-                <input placeholder = "" type="text" class="timepicker" name="leaving time">
+                <input placeholder = "" type="text" class="timepicker" name="leavingTime">
             </div>    
         </div>
 
@@ -48,8 +48,20 @@
     </div>
     <!-- THIRD TAB -->
     <div class="tab">Parking Spot Description
-        <p><input placeholder="Garage or Outdoor" name="parkingSpotType"></p>
-        <p><input placeholder="Compact or Regular" name="parkingSpotSize"></p>
+        <p>
+            Which type of parking space do you like?
+            <label><input type="radio" name="spaceCover" value="uncovered"><span>Uncovered</span></label>
+            <label><input type="radio" name="spaceCover" value="covered"><span>Covered</span></label>
+            <label><input type="radio" name="spaceCover" value="garage"><span>Garage</span></label>
+        </p>
+
+        <p>
+            What size of parking space do you like?
+            <label><input type="radio" name="spaceSize" value="standard"><span>Standard</span></label>
+            <label><input type="radio" name="spaceSize" value="compact"><span>Compact</span></label>
+            <label><input type="radio" name="spaceSize" value="motorcycle"><span>Motorcycle</span></label>
+            <label><input type="radio" name="spaceSize" value="rv"><span>RV</span></label>
+        </p>
     </div>
     <!-- FOURTH TAB -->
     <div class="tab">Price Range

@@ -25,20 +25,29 @@
         <div class="control-group">
             <label class="control-label">Address</label>
             <div class="controls">
-                <input id="autocomplete" id="address" name="address" type="text" placeholder="address line 1"
+                <input id="autocomplete" id="address" name="address" type="text" placeholder="address"
                 class="input-xlarge">
-                <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                
             </div>
         </div>
     </div>
 
-    {{!-- <!-- SECOND TAB -->
+    <!-- SECOND TAB -->
     <div class="tab">
-        <h5>Parking Location</h5>
-        <p>
-            Customer will go to your posted location. Adjust the pin to match your parking space exact location.
-        </p>
-    </div> --}}
+        <h5>Availability</h5>
+        <div class="dateTime">
+            <div class="date">
+                <label for="start date">Start Date</label>
+                <input placeholder = "" type="text" class="datepicker" name="firstDate">
+            </div>
+        </div>
+        <div class="dateTime">
+            <div class="date">
+                <label for="end date">End Date</label>
+                <input placeholder = "" type="text" class="datepicker" name="endDate">
+            </div>   
+        </div>
+    </div>
 
     <!-- THIRD TAB -->
     <div class="tab">
