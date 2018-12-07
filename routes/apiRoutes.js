@@ -58,9 +58,15 @@ module.exports = function(app) {
         // TODO: Get price filters to work together without overriding
 
         if (!isNaN(minPrice)) {
-            searchFilters.price = {[Op.gte]:minPrice};
-        }
-        if (!isNaN(maxPrice)) {
+            if(!isNaN(maxPrice)) {
+                console.log("MIN AND MAX");
+                searchFilters.price = {[Op.between]: [minPrice, maxPrice]};
+            } else {
+                console.log("MIN ONLY");
+                searchFilters.price = {[Op.gte]:minPrice};
+            }
+        } else if (!isNaN(maxPrice)) {
+            console.log("MAX ONLY");
             searchFilters.price = {[Op.lte]:maxPrice};
         }
 
