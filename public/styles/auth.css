@@ -16,14 +16,17 @@ background-repeat: no-repeat;
   border:2px solid ;
 }
 
+.header{
+	text-align: center;
+}
+
 .header .image, 
 .header .text {
 	display: inline-block;
-	text-align: center;
 }
-.image{
+/* .image{
 	text-align: center;
-}
+} */
 
 body {
   background-image: url(../images/auth-background.jpg);
