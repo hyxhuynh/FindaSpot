@@ -15,22 +15,48 @@ module.exports = function(app) {
     // GET will Giving me information back
     app.get("/api/parkingspace", function(req,res) {
         console.log(req.query);
+
+        // Get required query parameters
         const targLatitude = parseFloat(req.query.lat);
         const targLongitude = parseFloat(req.query.long);
+
+        // Get optional query parameters
+        const spaceCover = req.query.cover;
+        const spaceSize = req.query.size;
+        const minPrice = req.query.minPrice;
+        const maxPrice = req.query.maxPrice;
+
+        // Object for controlling search query
+        let searchFilters = {
+            // Limit results to within 1 degree of lat/long provided
+            latitude: {
+                [Op.between]: [(targLatitude-1), (targLatitude+1)]
+            },
+            longitude: {
+                [Op.between]: [targLongitude-1, targLongitude+1]
+            }
+        };
+        if (spaceCover) {
+            searchFilters.spaceCover = spaceCover;
+        }
+        if (spaceSize) {
+            searchFilters.spaceSize = spaceSize;
+        }
+        
+        // TODO: Add price functioning price filter
+        
+        // if (minPrice) {
+        //     searchFilters.price = minPrice;
+        // }
+        // if (maxPrice) {
+        //     searchFilters.price = maxPrice;
+        // }
 
         // If coordinates provided, search near coordinates
         if (targLatitude && targLongitude) {
             // Find spaces near coordinates
             db.ParkingSpace.findAll({
-                where: {
-                    // Limit results to within 1 degree of lat/long provided
-                    latitude: {
-                        [Op.between]: [(targLatitude-1), (targLatitude+1)]
-                    },
-                    longitude: {
-                        [Op.between]: [targLongitude-1, targLongitude+1]
-                    }
-                },
+                where: searchFilters,
                 attributes: {include:
                     // Distance calculation
                     [[sequelize.literal("(6371 * acos ( "
