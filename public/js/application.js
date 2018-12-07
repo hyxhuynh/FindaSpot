@@ -104,8 +104,6 @@ $("#regForm").on("submit", function (event) {
             console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
 
             let additionalFormData ={
-                // TODO: Get correct ownerId for submitting user
-                "ownerId": 1,
                 "latitude": newAddressLat,
                 "longitude": newAddressLng
             };

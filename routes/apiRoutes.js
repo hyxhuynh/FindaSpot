@@ -54,6 +54,8 @@ module.exports = function(app) {
     // Post new parking space
     app.post("/api/parkingspace", function(req, res) {
         let spaceInfo = req.body;
+        console.log(req.user);
+        spaceInfo.ownerId = req.user.id;
         console.log(spaceInfo);
 
         // sample req.body
