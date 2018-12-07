@@ -3,6 +3,8 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
 
+const userCurrentLocation = require("../public/js/MapJS");
+
 module.exports = function(app) {
 
     /***************************************
@@ -14,6 +16,7 @@ module.exports = function(app) {
     // Get parking spaces near location
     // GET will Giving me information back
     app.get("/api/parkingspace", function(req,res) {
+        console.log(userCurrentLocation);
         console.log(req.query);
         const targLatitude = parseFloat(req.query.lat);
         const targLongitude = parseFloat(req.query.long);
@@ -44,6 +47,7 @@ module.exports = function(app) {
                 order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
+                console.log(response);
             });
         } else {
             res.status(404).end();
