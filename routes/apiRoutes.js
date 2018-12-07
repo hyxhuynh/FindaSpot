@@ -14,17 +14,18 @@ module.exports = function(app) {
     // Get parking spaces near location
     // GET will Giving me information back
     app.get("/api/parkingspace", function(req,res) {
-        console.log(req.query);
+        const query = req.query;
+        console.log(query);
 
         // Get required query parameters
-        const targLatitude = parseFloat(req.query.lat);
-        const targLongitude = parseFloat(req.query.long);
+        const targLatitude = parseFloat(query.lat);
+        const targLongitude = parseFloat(query.long);
 
         // Get optional query parameters
-        const spaceCover = req.query.cover;
-        const spaceSize = req.query.size;
-        const minPrice = req.query.minPrice;
-        const maxPrice = req.query.maxPrice;
+        const spaceCover = query.cover;
+        const spaceSize = query.size;
+        const minPrice = parseFloat(query.minprice);
+        const maxPrice = parseFloat(query.maxprice);
 
         // Object for controlling search query
         let searchFilters = {
@@ -42,15 +43,15 @@ module.exports = function(app) {
         if (spaceSize) {
             searchFilters.spaceSize = spaceSize;
         }
-        
-        // TODO: Add price functioning price filter
-        
-        // if (minPrice) {
-        //     searchFilters.price = minPrice;
-        // }
-        // if (maxPrice) {
-        //     searchFilters.price = maxPrice;
-        // }
+
+        // TODO: Get price filters to work together without overriding
+
+        if (!isNaN(minPrice)) {
+            searchFilters.price = {[Op.gte]:minPrice};
+        }
+        if (!isNaN(maxPrice)) {
+            searchFilters.price = {[Op.lte]:maxPrice};
+        }
 
         // If coordinates provided, search near coordinates
         if (targLatitude && targLongitude) {
