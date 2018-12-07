@@ -99,33 +99,24 @@ $("#regForm").on("submit", function (event) {
         success: function (result) {
             console.log(result);
             // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
-            newAddressLat = result.results[0].geometry.location.lat;
-            newAddressLng = result.results[0].geometry.location.lng;
+            let newAddressLat = result.results[0].geometry.location.lat;
+            let newAddressLng = result.results[0].geometry.location.lng;
             console.log("New spotLat: ", newAddressLat, " New spot Lng: ", newAddressLng);
 
-            params = [
-                {
-                    name: "ownerId",
-                    // TODO: Get correct ownerId for submitting user
-                    value: 1
-                },
-                {
-                    name: "latitude",
-                    value: newAddressLat
-                },
-                {
-                    name: "longitude",
-                    value: newAddressLng
-                }
-            ];
+            let additionalFormData ={
+                // TODO: Get correct ownerId for submitting user
+                "ownerId": 1,
+                "latitude": newAddressLat,
+                "longitude": newAddressLng
+            };
 
-            form.append($.map(params, function (param) {
-                return $("<input>", {
+            for (param in additionalFormData) {
+                form.append($("<input>", {
                     type: "hidden",
-                    name: param.name,
-                    value: param.value
-                });
-            }));
+                    name: param,
+                    value: additionalFormData[param]
+                }));
+            }
 
             // Use form[0] to call JS native submit() on form instead of $.submit() to prevent infinite loop
             form[0].submit();
