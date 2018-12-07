@@ -13,6 +13,17 @@ module.exports = function(app) {
 
     // Get parking spaces near location
     // GET will Giving me information back
+
+    /** Query parameters:
+     *
+     * lat      | required | number | Latitude in degrees, min: -90, max: 90
+     * long     | required | number | Longitude in degrees, min: -180, max: 180
+     *
+     * cover    | optional | string | possible values "uncovered", "covered", "garage"
+     * size     | optional | string | possible values "standard", "compact", "motorcycle", "rv"
+     * minprice | optional | number | Minimum price in dollars
+     * maxprice | optional | number | Maximum price in dollars
+     */
     app.get("/api/parkingspace", function(req,res) {
         const query = req.query;
         console.log(query);
