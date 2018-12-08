@@ -80,12 +80,10 @@ $(document).ready( function () {
         console.log("Current location ",userLat, userLng);
         // Now take the console.log lat and lng and put it into the get request
         // USE api route to pull all parking spaces 1 lat and lng away from the users current geolocation node
-        var url = "/api/parkingspace?";
-        var lat = `lat=${userLat}`;
-        var lng = `&long=${userLng}`;
+        var url = `/api/parkingspace?lat=${userLat}&long=${userLng}`;
         $.ajax({
             type: "GET",
-            url: url + lat + lng
+            url: url
         }).then(function (data) {
             console.log("data ", data);
             console.log("firstSpotLat: ", data[0].latitude, "FirstSpotLng: ", data[0].longitude);
