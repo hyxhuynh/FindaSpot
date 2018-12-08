@@ -32,6 +32,12 @@ module.exports = function(app) {
         res.render("ownerApplication");
     });
 
+    // Render Our story page
+    // User does not need to login
+    app.get("/ourStory", function(req, res) {
+        res.render("ourStory");
+    });
+
     // Render Owner Application page
     app.get("/owner/confirmation", function(req, res) {
         console.log("REQ.QUERY", req.query);
