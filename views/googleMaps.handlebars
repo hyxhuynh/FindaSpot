@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/styles/spaceCard.css">
 
 {{!-- <!-- jquery --> --}}
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> --}}
 
 {{> navBar}}
 
@@ -68,10 +68,13 @@
         <div id="map" class="mapRight"></div>
     </div>
 
-    {{!-- <!--- Google API JAVASCRIP CODE---> --}}
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
+  
+{{!-- GoogleMap JS code --}}
+<script src="/js/mapJS.js"></script>
+
+{{!-- <!--- Google API JAVASCRIPT CODE---> --}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
       async defer></script>
-  {{!-- GoogleMap JS code --}}
-  <script src="/js/mapJS.js"></script>
-  <script src ="/js/loadPin.js"></script>
+  
+<script src ="/js/loadPin.js"></script>
