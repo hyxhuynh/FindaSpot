@@ -1,3 +1,37 @@
+// Makes a new HTML card for a ParkingSpace
+function makeParkingSpaceCard(spaceData) {
+    // Setup main card container
+    let card = $("<div>").addClass("panel spaceCard");
+
+    // Create header with address
+    let header = $("<div>").addClass("panel-heading spaceCard-header")
+        .text("1234 56th Ave NE, City, ST");
+    card.append(header);
+
+    // Create card body
+    let body = $("<div>").addClass("panel-body");
+    card.append(body);
+
+    // Add image to body
+    let spaceImg = $("<img>").addClass("spaceCard_img")
+        .attr("src","https://maps.googleapis.com/maps/api/streetview?parameters&size=200x150&fov=50&location=4055%20Factoria%20Blvd%20SE%20Bellevue%20WA&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk");
+    body.append(spaceImg);
+
+    // Add reserve button to body
+    let reserveButton = $("<button>").addClass("spaceCard_reserveBtn")
+        .text("Reserve");
+    body.append(reserveButton);
+
+    // Add tags to body
+    let tagDiv = $("<div>");
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("Covered") );
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("Standard") );
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("$6.00") );
+    body.append(tagDiv);
+
+    return card;
+}
+
 $(document).ready( function () {
     console.log("Linked to pin page");
 
@@ -42,8 +76,17 @@ $(document).ready( function () {
             console.log("firstSpotLat: ", data[0].latitude, "FirstSpotLng: ", data[0].longitude);
 
             for (let i = 0; i < data.length; i++) {
+                // Add pins to map
                 addMarker(data[i]);
             }
+
+            // Create cards for parking spaces and add to card area
+            // // $("#aviSpotsTable").empty();
+            // data.forEach(spaceData => {
+            //     $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
+            // });
+            $("#aviSpotsTable").append(makeParkingSpaceCard(data[0]));
+            console.log("MADE");
 
             // now take the data returned from the API and and add those pins to the map
 
