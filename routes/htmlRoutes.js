@@ -27,6 +27,15 @@ module.exports = function(app) {
         res.render("googleMaps");
     });
 
+    // Render page to make reservation on space
+    app.get("/reservespace", function (req, res) {
+        res.render("driverApplication");
+    });
+
+    app.get("/reservespace/confirmation", function (req, res) {
+        res.render("reservationConfirmation");
+    });
+
     // Render Owner Application page
     app.get("/owner/application", auth.isLoggedIn, function(req, res) {
         res.render("ownerApplication");

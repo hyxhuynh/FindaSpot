@@ -106,6 +106,10 @@ $(document).ready( function () {
     });
 });
 
+$(document).on("click",".spaceCard_reserveBtn", function() {
+    console.log("clicked",$(this).data());
+    window.location.href = "/reservespace";
+});
 var newInputAddress = $("#autocomplete");
 var newCoverFilter = $("#cover");
 var newSizeFilter = $("#size");

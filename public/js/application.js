@@ -73,6 +73,7 @@ function nextPrev(n) {
         // ... the form gets submitted:
         // document.getElementById("regForm").submit();
         $("#regForm").submit();
+        $("#reservationForm").submit();
         return false;
     }
     // Otherwise, display the correct tab:
@@ -145,4 +146,29 @@ $("#regForm").on("submit", function (event) {
 
 });
 
+$("#reservationForm").on("submit", function (event) {
+    // Prevent default form submission to add more information before submitting
+    event.preventDefault();
 
+
+    let form = $(this);
+
+    console.log("FORM SUBMITTED");
+
+    let additionalFormData ={
+        spaceId: 1
+    };
+
+    for (param in additionalFormData) {
+        form.append($("<input>", {
+            type: "hidden",
+            name: param,
+            value: additionalFormData[param]
+        }));
+    }
+
+    // Use form[0] to call JS native submit() on form instead of $.submit() to prevent infinite loop
+    form[0].submit();
+
+
+});

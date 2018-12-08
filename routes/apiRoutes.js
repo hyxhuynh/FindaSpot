@@ -265,6 +265,10 @@ module.exports = function(app) {
 
     // Route to create new Reservation on a ParkingSpace
     app.post("/api/reservation", (req, res) => {
+        //TEMPORARY
+        return res.redirect("/reservespace/confirmation");
+
+        // REIMPLEMENT LATER
         const data = req.body;
         console.log(data);
 
