@@ -1,5 +1,6 @@
 $(document).ready( function () {
-    console.log("Linked to pin page")
+    console.log("Linked to pin page");
+
     function addMarker(spot) {
         var marker = new google.maps.Marker({
             position: {lat: spot.latitude, lng: spot.longitude },
@@ -21,13 +22,15 @@ $(document).ready( function () {
             infowindow.open(map, marker);
         });
 
-    };
+    }
+
+
     navigator.geolocation.getCurrentPosition(function (currentPosition) {
         var userLat = currentPosition.coords.latitude;
         var userLng = currentPosition.coords.longitude;
         console.log("Current location ",userLat, userLng);
         // Now take the console.log lat and lng and put it into the get request
-        // USE api route to pull all parking spaces 1 lat and lng away from the users current geo locationnode 
+        // USE api route to pull all parking spaces 1 lat and lng away from the users current geolocation node
         var url = "/api/parkingspace?";
         var lat = `lat=${userLat}`;
         var lng = `&long=${userLng}`;
@@ -40,9 +43,8 @@ $(document).ready( function () {
 
             for (let i = 0; i < data.length; i++) {
                 addMarker(data[i]);
-                
             }
-        
+
             // now take the data returned from the API and and add those pins to the map
 
             // address: "1457 7th Avenue, Seattle, WA, USA"
@@ -62,5 +64,3 @@ $(document).ready( function () {
 
     });
 });
-
-    
