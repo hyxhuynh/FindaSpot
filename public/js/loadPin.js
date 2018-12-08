@@ -102,11 +102,22 @@ $(document).ready( function () {
 });
 
 var newInputAddress = $("#autocomplete");
+var newCoverFilter = $("#cover");
+var newSizeFilter = $("#size");
+var minFilter = $("#minPrice");
+var maxFilter = $("#maxPrice");
+
+
+
 
 $("#filterSpotsSubmit").on("click", function (event) {
     event.preventDefault();
     var newAddress = newInputAddress.val();
-    var newCover = 
+    var newCover = newCoverFilter.val();
+    var newSize = newSizeFilter.val();
+    var newMinPrice = minFilter.val();
+    var newMaxPrice = maxFilter.val();
+    
 
     $.ajax({
         type: "GET",
@@ -120,15 +131,16 @@ $("#filterSpotsSubmit").on("click", function (event) {
         var url = "/api/parkingspace?";
         var lat = `lat=${newAddressLat}`;
         var lng = `&long=${newAddressLng}`;
-        var cover =  `&cover=${newAddressLng}`;
-        var size =`&size=${newAddressLng}`;
-        var minPrice = `&minPrice=${newAddressLng}`;
-        var maxPrice = `&maxProce=${newAddressLng}`;
+        var cover = `&cover=${newCover}`;
+        var size =`&size=${newSize}`;
+        var minPrice = `&minprice=${newMinPrice}`;
+        var maxPrice = `&maxprice=${newMaxPrice}`;
 
         $.ajax({
             type: "GET",
-            url: url + lat + lng
+            url: url + lat + lng + cover + size + minPrice + maxPrice
         }).then(function (newData) {
+            console.log("URL", url + lat + lng + cover + size + minPrice + maxPrice);
             console.log("data ", newData);
             console.log("firstSpotLat: ", newData[0].latitude, "FirstSpotLng: ", newData[0].longitude);
 
