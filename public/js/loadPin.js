@@ -1,11 +1,12 @@
 // Makes a new HTML card for a ParkingSpace
 function makeParkingSpaceCard(spaceData) {
+    const address = spaceData.address;
     // Setup main card container
     let card = $("<div>").addClass("panel spaceCard");
 
     // Create header with address
     let header = $("<div>").addClass("panel-heading spaceCard-header")
-        .text("1234 56th Ave NE, City, ST");
+        .text(address);
     card.append(header);
 
     // Create card body
@@ -14,19 +15,20 @@ function makeParkingSpaceCard(spaceData) {
 
     // Add image to body
     let spaceImg = $("<img>").addClass("spaceCard_img")
-        .attr("src","https://maps.googleapis.com/maps/api/streetview?parameters&size=200x150&fov=50&location=4055%20Factoria%20Blvd%20SE%20Bellevue%20WA&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk");
+        .attr("src",`https://maps.googleapis.com/maps/api/streetview?parameters&size=200x150&fov=50&location=${address}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`);
     body.append(spaceImg);
 
     // Add reserve button to body
     let reserveButton = $("<button>").addClass("spaceCard_reserveBtn")
-        .text("Reserve");
+        .text("Reserve")
+        .data("id", spaceData.id);
     body.append(reserveButton);
 
     // Add tags to body
     let tagDiv = $("<div>");
-    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("Covered") );
-    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("Standard") );
-    tagDiv.append( $("<span>").addClass("spaceCard_tag").text("$6.00") );
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text(spaceData.spaceSize) );
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text(spaceData.spaceCover) );
+    tagDiv.append( $("<span>").addClass("spaceCard_tag").text(`$${spaceData.price.toFixed(2)}`) );
     body.append(tagDiv);
 
     return card;
