@@ -35,11 +35,7 @@ a:hover {
 #aviSpotsTable {
     float: left;
     width: 74%;
-    background-color: #272A57;
-    min-height: 650px;
-    border: solid 2.5px #59A2FE;
-    border-radius: 15px;
-    
+    min-height: 650px;    
 }
 
 #wrapper {
@@ -142,5 +138,14 @@ body {
     -o-transition: .25s all ease;
     transition: .25s all ease;
   }
+
+  .contentDiv {
+    float: left;
+    width: 74%;
+    background-color: #272A57;
+    border: solid 2.5px #59A2FE;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
 
 
