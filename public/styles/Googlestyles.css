@@ -140,8 +140,8 @@ body {
   }
 
   .contentDiv {
-    float: left;
-    width: 74%;
+    /* float: left; */
+    /* width: 74%; */
     background-color: #272A57;
     border: solid 2.5px #59A2FE;
     border-radius: 15px;
