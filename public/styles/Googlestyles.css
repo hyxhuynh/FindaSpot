@@ -95,7 +95,7 @@ body {
     outline: 0;
     box-shadow: none;
     border: 0 !important;
-    background: #B1D3FE;
+    background: white;
     background-image: none;
   }
   /* Custom Select */
@@ -129,8 +129,8 @@ body {
     right: 0;
     bottom: 0;
     padding: 0 1em;
-    background: #34495e;
-    color: orange;
+    background: #26a69a;
+    color: #272A57;
     pointer-events: none;
   }
   /* Transition */
