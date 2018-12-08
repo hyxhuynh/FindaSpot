@@ -1,0 +1,46 @@
+.spaceCardGroup {
+    /* overflow: hidden; */
+}
+
+.spaceCard {
+    text-align: center;
+    display:inline-block;
+
+    margin: 10px 20px !important;
+}
+
+.spaceCard > .spaceCard-header {
+    background: #511980;
+    color: #e6e6fa;
+    font-weight: bold;
+}
+
+.spaceCard_img {
+    margin: 0px 5px 10px;
+}
+
+.spaceCard_reserveBtn {
+    display: block;
+
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    margin: 0px auto 10px;
+
+    background: #272A57;
+    color: #B1D3FE ;
+    font-size: 16px;
+    /* font-weight: bold; */
+}
+
+.spaceCard_tag {
+    display: inline-block;
+
+    background: #59A2FE;
+    color: #272A57;
+
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 3px;
+
+}

@@ -36,7 +36,7 @@ a:hover {
     float: left;
     width: 74%;
     background-color: #272A57;
-    height: 650px;
+    min-height: 650px;
     border: solid 2.5px #59A2FE;
     border-radius: 15px;
     
