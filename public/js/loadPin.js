@@ -46,7 +46,7 @@ function displaySpaceCards(data) {
     });
 }
 
-
+// On page load take in the geoLocation and load pins around that area
 $(document).ready( function () {
     console.log("Linked to pin page");
     // Function to Add markers from database to google map
@@ -102,3 +102,87 @@ $(document).ready( function () {
 
     });
 });
+
+var newInputAddress = $("#autocomplete");
+
+$("#filterSpotsSubmit").on("click", function (event) {
+    event.preventDefault();
+    var newAddress = newInputAddress.val();
+    var newCover = 
+
+    $.ajax({
+        type: "GET",
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address="+newAddress+"&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk"
+    }).then(function (result) {
+        // Save the lat and lng as variables from the json obj returned from the google geocoder ajax call
+        var newAddressLat = result.results[0].geometry.location.lat;
+        var newAddressLng = result.results[0].geometry.location.lng;
+        console.log("New address lat/long", newAddressLat, newAddressLng);
+
+        var url = "/api/parkingspace?";
+        var lat = `lat=${newAddressLat}`;
+        var lng = `&long=${newAddressLng}`;
+        var cover =  `&cover=${newAddressLng}`;
+        var size =`&size=${newAddressLng}`;
+        var minPrice = `&minPrice=${newAddressLng}`;
+        var maxPrice = `&maxProce=${newAddressLng}`;
+
+        $.ajax({
+            type: "GET",
+            url: url + lat + lng
+        }).then(function (newData) {
+            console.log("data ", newData);
+            console.log("firstSpotLat: ", newData[0].latitude, "FirstSpotLng: ", newData[0].longitude);
+
+            for (let i = 0; i < newData.length; i++) {
+                // Add pins to map
+                addMarker(newData[i]);
+            }
+
+            // Create cards for parking spaces and add to card area
+            displaySpaceCards(newData);
+
+        });
+
+
+
+        // Reload map with new markers
+        initMap();
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////
+//     var url = "/api/parkingspace?";
+//     var lat = `lat=${userLat}`;
+//     var lng = `&long=${userLng}`;
+//     $.ajax({
+//         type: "GET",
+//         url: url + lat + lng
+//     }).then(function (data) {
+//         console.log("data ", data);
+//         console.log("firstSpotLat: ", data[0].latitude, "FirstSpotLng: ", data[0].longitude);
+
+//         for (let i = 0; i < data.length; i++) {
+//             // Add pins to map
+//             addMarker(data[i]);
+//         }
+
+//         // Create cards for parking spaces and add to card area
+//         displaySpaceCards(data);
+
+//     });
+
+    
+// });
