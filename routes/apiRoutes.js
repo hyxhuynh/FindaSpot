@@ -3,6 +3,11 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
 
+<<<<<<< HEAD
+=======
+// const userCurrentLocation = require("../public/js/MapJS");
+
+>>>>>>> 160aa9b9336f818b90df7b2831cf47586d60284c
 module.exports = function(app) {
 
     /***************************************

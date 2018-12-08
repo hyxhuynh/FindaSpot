@@ -1,6 +1,7 @@
     
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/googleStyles.css">
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
-
 <!-- Date and Time picker -->
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,8 +12,10 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-{{!-- TODO: Figure out how to add navBar partial with correct styling --}}
-{{!-- {{> navBar}} --}}
+{{!-- <!-- jquery --> --}}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{{> navBar}}
 
 <form id="regForm" method="POST" action="/api/parkingspace">
     <h4>List Your Parking Space</h4>
@@ -23,21 +26,38 @@
 
         <!-- address input-->
         <div class="control-group">
-            <label class="control-label">Address</label>
+            {{!-- <label class="control-label">Address</label> --}}
             <div class="controls">
-                <input id="autocomplete" id="address" name="address" type="text" placeholder="address line 1"
+                <input id="autocomplete" id="address" name="address" type="text" placeholder="address"
                 class="input-xlarge">
-                <p class="help-block">Street address, P.O. box, company name, c/o</p>
             </div>
         </div>
     </div>
 
-    {{!-- <!-- SECOND TAB -->
-    <div class="tab">
-        <h5>Parking Location</h5>
-        <p>
-            Customer will go to your posted location. Adjust the pin to match your parking space exact location.
-        </p>
+    <!-- SECOND TAB -->
+   {{!-- <div class="tab dateTimeContainer">
+        <div class="dateTime">
+            <div class="date">
+                <label for="start date">Start Date</label>
+                <input placeholder = "" type="text" class="datepicker" name="start date">
+            </div>
+            
+            <div class="time">
+                <label for="arrival time">Arrival Time</label>   
+                <input placeholder = "" type="text" class="timepicker" name="arrival time">
+            </div>
+        </div>
+        
+        <div class="dateTime">
+            <div class="date">
+                <label for="end date">End Date</label>
+                <input placeholder = "" type="text" class="datepicker" name="end date">
+            </div>
+            <div class="time">
+                <label for="leaving time">Leaving Time</label>
+                <input placeholder = "" type="text" class="timepicker" name="leaving time">
+            </div>    
+        </div>
     </div> --}}
 
     <!-- THIRD TAB -->
@@ -78,18 +98,19 @@
 </form>
 
 
+{{!-- Load Google API required functions first --}}
+<script src="/js/mapJS.js"></script>
+
 {{!-- GoogleMap JS code --}}
 
 {{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script> --}}
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
         async defer></script>
         
-<script src="/js/mapJS.js"></script>
-
 <!-- Moment.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script> 
 
 <!-- JavaScript/jQuery -->
-<script src="/js/application.js"></script>
 {{!-- <script src="/js/materialize.js"></script> --}}
-<script src="/js/daysCalculation.js"></script>
+<script src="/js/application.js"></script>
+{{!-- <script src="/js/daysCalculation.js"></script> --}}
