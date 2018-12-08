@@ -90,7 +90,6 @@ module.exports = function(app) {
                 order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
-                console.log(response);
             });
         } else {
             res.status(404).end();
