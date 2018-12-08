@@ -3,6 +3,8 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
 
+const userCurrentLocation = require("../public/js/MapJS");
+
 module.exports = function(app) {
 
     /***************************************
@@ -13,24 +15,68 @@ module.exports = function(app) {
 
     // Get parking spaces near location
     // GET will Giving me information back
+
+    /** Query parameters:
+     *
+     * lat      | required | number | Latitude in degrees, min: -90, max: 90
+     * long     | required | number | Longitude in degrees, min: -180, max: 180
+     *
+     * cover    | optional | string | possible values "uncovered", "covered", "garage"
+     * size     | optional | string | possible values "standard", "compact", "motorcycle", "rv"
+     * minprice | optional | number | Minimum price in dollars
+     * maxprice | optional | number | Maximum price in dollars
+     */
     app.get("/api/parkingspace", function(req,res) {
-        console.log(req.query);
-        const targLatitude = parseFloat(req.query.lat);
-        const targLongitude = parseFloat(req.query.long);
+        const query = req.query;
+        console.log(query);
+
+        // Get required query parameters
+        const targLatitude = parseFloat(query.lat);
+        const targLongitude = parseFloat(query.long);
+
+        // Get optional query parameters
+        const spaceCover = query.cover;
+        const spaceSize = query.size;
+        const minPrice = parseFloat(query.minprice);
+        const maxPrice = parseFloat(query.maxprice);
+
+        // Object for controlling search query
+        let searchFilters = {
+            // Limit results to within 1 degree of lat/long provided
+            latitude: {
+                [Op.between]: [(targLatitude-1), (targLatitude+1)]
+            },
+            longitude: {
+                [Op.between]: [targLongitude-1, targLongitude+1]
+            }
+        };
+        if (spaceCover) {
+            searchFilters.spaceCover = spaceCover;
+        }
+        if (spaceSize) {
+            searchFilters.spaceSize = spaceSize;
+        }
+
+        // TODO: Get price filters to work together without overriding
+
+        if (!isNaN(minPrice)) {
+            if(!isNaN(maxPrice)) {
+                console.log("MIN AND MAX");
+                searchFilters.price = {[Op.between]: [minPrice, maxPrice]};
+            } else {
+                console.log("MIN ONLY");
+                searchFilters.price = {[Op.gte]:minPrice};
+            }
+        } else if (!isNaN(maxPrice)) {
+            console.log("MAX ONLY");
+            searchFilters.price = {[Op.lte]:maxPrice};
+        }
 
         // If coordinates provided, search near coordinates
         if (targLatitude && targLongitude) {
             // Find spaces near coordinates
             db.ParkingSpace.findAll({
-                where: {
-                    // Limit results to within 1 degree of lat/long provided
-                    latitude: {
-                        [Op.between]: [(targLatitude-1), (targLatitude+1)]
-                    },
-                    longitude: {
-                        [Op.between]: [targLongitude-1, targLongitude+1]
-                    }
-                },
+                where: searchFilters,
                 attributes: {include:
                     // Distance calculation
                     [[sequelize.literal("(6371 * acos ( "
@@ -44,6 +90,7 @@ module.exports = function(app) {
                 order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
+                console.log(response);
             });
         } else {
             res.status(404).end();

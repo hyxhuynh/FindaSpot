@@ -3,6 +3,30 @@
 }
 
 /* Amber- CSS for auth */
+.header {
+	background-color: #272A57;
+    border-bottom: solid 2px black;
+}
+
+.header .image {
+width: 100%;
+height: auto;
+background-repeat: no-repeat;
+  color: #272A57;
+  border:2px solid ;
+}
+
+.header{
+	text-align: center;
+}
+
+.header .image, 
+.header .text {
+	display: inline-block;
+}
+/* .image{
+	text-align: center;
+} */
 
 body {
   background-image: url(../images/auth-background.jpg);
@@ -13,7 +37,6 @@ body {
 }
 .panel-login {
     margin: 50px 0;
-    /* border: #ccc solid 1px; */
     -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -21,11 +44,8 @@ body {
 }
 .panel-login>.panel-heading {
 	color: #272A57;
-	/* background-color: #fff; */
-	/* border-color: #fff; */
 	text-align:center;
 	border: none;
-	/* border-bottom: 1px solid pink; */
 	margin-bottom: -1px;
 	padding: 0 15px;
 }
@@ -74,50 +94,6 @@ body {
 	box-shadow: none;
 	border-color: #ccc;
 }
-/*.btn-login {s
-	background-color: #59A2FE;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	height: auto;
-	font-weight: normal;
-	padding: 14px 0;
-	text-transform: uppercase;
-	border-color: #59A2FE;
-}
-.btn-login:hover,
-.btn-login:focus {
-	color: #fff;
-	background-color: #272A57;
-	border-color: #272A57;
-}
- .forgot-password {
-	text-decoration: underline;
-	color: #888;
-}
-.forgot-password:hover,
-.forgot-password:focus {
-	text-decoration: underline;
-	color: #272A57;
-}
-
-.btn-register {
-	background-color: #59A2FE;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	height: auto;
-	font-weight: normal;
-	padding: 14px 0;
-	text-transform: uppercase;
-	border-color: #59A2FE;
-}
-.btn-register:hover,
-.btn-register:focus {
-	color: #fff;
-	background-color: #272A57;
-	border-color: #272A57;
-} */
 
 .panel .btn {
 	background-color: #59A2FE;
