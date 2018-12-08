@@ -5,7 +5,7 @@
 /* Amber- CSS for auth */
 .header {
 	background-color: #272A57;
-    border: 2px;
+    border-bottom: solid 2px black;
 }
 
 .header .image {
