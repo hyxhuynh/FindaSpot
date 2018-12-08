@@ -1,0 +1,68 @@
+
+#navBackground {
+    background-color: #272A57;
+    border-bottom: solid black 2px;
+}
+
+.navbar-brand {
+    color: #59A2FE !important;
+    font-weight: bold;
+}
+
+a {
+    color: #B1D3FE !important;
+}
+
+a:hover {
+    color:  #59A2FE !important;
+}
+
+#backOfHomeTag {
+    color: #272A57 !important; 
+}
+
+#searchNav {
+    margin-left: 45%
+}
+
+body {
+    background-image: url("../images/parking_spots_one_car.jpg");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+#wrapper {
+    margin: 20px;
+}
+
+#mainLine {
+    font-size: 70px;
+    font-weight: bolder;
+    padding-left: 4%;
+    padding-bottom: 2%;
+}
+
+#secondaryLine {
+    font-size: 40px;
+    font-weight: 100;
+    padding-left: 4%;
+    padding-top: 2%;
+}
+
+.card {
+    border: none;
+    margin: 20px;
+}
+
+.card-img-top {
+    width: 100%;
+}
+
+.content {
+    margin: 20px;
+    color: white;
+    background-color: #272A57;
+    border: solid 2.5px #59A2FE;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}

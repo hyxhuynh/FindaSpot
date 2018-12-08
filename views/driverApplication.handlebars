@@ -13,7 +13,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-<form id="regForm" action="/googleMapsPage">
+<form id="reservationForm" class="regForm" method="POST" action="/api/reservation">
     <h3>Your Chosen Parking Space</h3>
     <br>
     <!-- FIRST TAB -->
@@ -42,7 +42,7 @@
         </div>
 
     </div>
-    <!-- SECOND TAB -->
+    {{!-- <!-- SECOND TAB -->
     <div class="tab">General Location
         <p><input placeholder="City, State, Zipcode" name="location" id="autocomplete"></p>
     </div>
@@ -55,8 +55,8 @@
     <div class="tab">Price Range
         <p><input placeholder="Min Price" name="minPrice"></p>
         <p><input placeholder="Max Price" name="maxPrice"></p>
-    </div>
-    <!-- FIFTH TAB -->
+    </div> --}}
+    {{!-- <!-- FIFTH TAB -->
     <div class="tab">Summary
         <ol>
             <li>[Owner's name]</li>   
@@ -68,7 +68,7 @@
             <li>Price per day: $</li>     
             <li>Description: </li>
         </ol> 
-    </div>
+    </div> --}}
 
     <div style="overflow:auto;">
       <div style="float:right;">
@@ -93,9 +93,8 @@
 {{!-- GoogleMap JS code --}}
 
 {{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script> --}}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
-        async defer></script>
-<script src="/js/mapJS.js"></script>
+    {{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete" async defer></script> --}}
+{{!-- <script src="/js/mapJS.js"></script> --}}
 
 <script src="/js/application.js"></script>
 <script src="/js/materialize.js"></script>

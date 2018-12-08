@@ -1,18 +1,20 @@
-    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/googleStyles.css">
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
-
 <!-- Date and Time picker -->
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-{{!-- <link href="/styles/dateTimePickerStyle.css" rel="stylesheet">
-<link href="/styles/materialize.css" rel="stylesheet"> --}}
+{{!-- <link href="/styles/dateTimePickerStyle.css" rel="stylesheet"> --}}
+{{!-- <link href="/styles/materialize.css" rel="stylesheet"> --}}
 
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-{{!-- <!--- Google API JAVASCRIP CODE---> --}}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw"></script>
+{{!-- <!-- jquery --> --}}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{{> navBar}}
 
 <form id="regForm">
     <h4>Summary</h4>
@@ -20,21 +22,21 @@
     <!-- FIRST TAB -->
     <div class="tab">
         <p>
-            <strong>Address:</strong> {{address}}, {{city}}, {{state}} {{postalCode}}</p>
+            <span id="stats">Address:</span> {{address}}</p>
         <p>
         <p>
-            <strong>Price:</strong> {{price}}
+            <span id="stats">Price:</span> ${{price}}
         </p>
         <p>
-            <strong>Type:</strong> {{spaceCover}}
+            <span id="stats">Type:</span> {{spaceCover}}
         </p>
         <p>
-            <strong>Size:</strong> {{spaceSize}}
+            <span id="stats">Size:</span> {{spaceSize}}
         </p>
         <p>
-            <strong>Description:</strong> {{description}}
+            <span id="stats">Description:</span> {{description}}
         </p>
-        <p>
+        {{!-- <p>
             Driver can reach at the following contact information:
         </p>
         <p>
@@ -45,11 +47,9 @@
         </p>
         <p>
             Email: {{ownerEmail}}
-        </p>
+        </p> --}}
         
     </div>
-
-    <button><a href="/">← Back To Home</a></button>
 
 </form>
 
@@ -57,10 +57,10 @@
 <script src="/js/mapJS.js"></script>
 
 <!-- Moment.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script> 
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script>  --}}
 
 <!-- JavaScript/jQuery -->
 <script src="/js/application.js"></script>
 {{!-- <script src="/js/materialize.js"></script> --}}
-<script src="/js/daysCalculation.js"></script>
+{{!-- <script src="/js/daysCalculation.js"></script> --}}
 

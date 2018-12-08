@@ -3,13 +3,20 @@
   }
   
   body {
-    background-color: #f1f1f1;
+    background-image: url("../images/parking_spots_one_car.jpg");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif
+  }
+
+  h4, h5 {
+    color: #272A57;
+    text-align: center;
   }
   
-  #regForm {
+  .regForm {
     background-color: #ffffff;
     margin: 100px auto;
-    font-family: Raleway;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 40px;
     width: 70%;
     min-width: 300px;
@@ -37,14 +44,19 @@
     display: none;
   }
   
-  button {
-    background-color: #4CAF50;
+  .backButton, button {
+    background-color: #26a69a;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
     font-size: 17px;
     font-family: Raleway;
     cursor: pointer;
+  }
+
+  #stats {
+    font-weight: bolder;
+    font-size: 20px;
   }
   
   button:hover {

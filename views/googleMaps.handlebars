@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/styles/googleStyles.css">
+
 
 {{!-- <!-- Bootstrap CSS --> --}}
   {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -6,10 +6,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/googleStyles.css">
 <link rel="stylesheet" href="/styles/spaceCard.css">
 
+
 {{!-- <!-- jquery --> --}}
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> --}}
 
 {{> navBar}}
 
@@ -17,11 +19,19 @@
         <div class="contentDiv">
             {{!-- TODO: Styling for filter bar --}}
             <form action="" id="spaceInput">
+                    <div class="filterPosition1">
 
-                    <div class="filterPosition">
+                        <div class="address">
+                            <input  id="autocomplete" id="address" type="text" name="address" placeholder="Address">
+                        </div>
+
+
+                    </div>
+
+                    <div class="filterPosition2">
                       
                         <div class="select">
-                            <select name="spaceCover" id="">
+                            <select name="spaceCover" id="cover">
                             <option value="">Parking Type</option>
                             <option value="uncovered">Uncovered</option>
                             <option value="covered">Covered</option>
@@ -29,8 +39,8 @@
                             </select>
                         </div>
 
-                        <div class="select">
-                            <select name="spaceSize" id="">
+                        <div class="select" id = "">
+                            <select name="spaceSize" id="size">
                             <option value="">Parking Size</option>
                             <option value="standard">Standard</option>
                             <option value="compact">Compact</option>
@@ -46,9 +56,15 @@
 
                         <div class="price">
                             {{!-- <label for="maxPrice">Max Price:</label> --}}
-                            <input id="minPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
+                            <input id="maxPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
                         </div>
 
+                        
+
+                    </div>
+
+                    <div class="filterPosition2">
+                        <button id="filterSpotSubmit">Submit</button>
                     </div>
 
             </form>
@@ -59,10 +75,13 @@
         <div id="map" class="mapRight"></div>
     </div>
 
-    {{!-- <!--- Google API JAVASCRIP CODE---> --}}
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
+  
+{{!-- GoogleMap JS code --}}
+<script src="/js/mapJS.js"></script>
+
+{{!-- <!--- Google API JAVASCRIPT CODE---> --}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
       async defer></script>
-  {{!-- GoogleMap JS code --}}
-  <script src="/js/mapJS.js"></script>
-  <script src ="/js/loadPin.js"></script>
+  
+<script src ="/js/loadPin.js"></script>

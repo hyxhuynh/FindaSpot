@@ -3,7 +3,7 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
 
-const userCurrentLocation = require("../public/js/MapJS");
+// const userCurrentLocation = require("../public/js/MapJS");
 
 module.exports = function(app) {
 
@@ -90,7 +90,6 @@ module.exports = function(app) {
                 order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
-                console.log(response);
             });
         } else {
             res.status(404).end();
@@ -266,6 +265,10 @@ module.exports = function(app) {
 
     // Route to create new Reservation on a ParkingSpace
     app.post("/api/reservation", (req, res) => {
+        //TEMPORARY
+        return res.redirect("/reservespace/confirmation");
+
+        // REIMPLEMENT LATER
         const data = req.body;
         console.log(data);
 

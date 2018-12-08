@@ -29,7 +29,6 @@ a:hover {
 .mapRight {
     width: 25%;
     float: right;
-    
 }
 
 #aviSpotsTable {
@@ -43,7 +42,7 @@ a:hover {
 }
 
 body {
-    background-color: black;
+    /* background-color: black; */
 }
 
 #backOfHomeTag {
@@ -54,20 +53,28 @@ body {
     margin-left: 45%
 }
 
+
 /* Style for Filtering bar */
 
-  .filterPosition {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    /* width: 50% */
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%); */
-  }
 
-  .price {
+.filterPosition1 {
+    display: flex;
+    justify-content: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+input {
+    width: 300px;
+}
+
+.filterPosition2 {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.price {
     position: relative;
     display: block;
     /* width: 20em;
@@ -77,13 +84,21 @@ body {
     overflow: hidden;
     border-radius: .25em;
     margin-right: 10px;
-  }
+}
 
-  h1 {
-    text-align: center;
-  }
-  /* Reset Select */
-  select {
+.address {
+    position: relative;
+    display: block;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: .25em;
+}
+
+h1 {
+text-align: center;
+}
+/* Reset Select */
+select {
     -webkit-appearance: none; 
     -moz-appearance: none;
     -ms-appearance: none;
@@ -93,9 +108,9 @@ body {
     border: 0 !important;
     background: white;
     background-image: none;
-  }
-  /* Custom Select */
-  .select {
+}
+/* Custom Select */
+.select {
     position: relative;
     display: block;
     width: 20em;
@@ -105,20 +120,22 @@ body {
     overflow: hidden;
     border-radius: .25em;
     margin-right: 10px;
-  }
-  select {
+}
+
+select {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0 0 0 .5em;
     color:  #B1D3FE;
     cursor: pointer;
-  }
-  select::-ms-expand {
+}
+
+select::-ms-expand {
     display: none;
-  }
-  /* Arrow */
-  .select::after {
+}
+/* Arrow */
+.select::after {
     content: '\25BC';
     position: absolute;
     top: 0;
@@ -128,24 +145,51 @@ body {
     background: #26a69a;
     color: #272A57;
     pointer-events: none;
-  }
-  /* Transition */
-  .select:hover::after {
+}
+/* Transition */
+.select:hover::after {
     color: #B1D3FE;
-  }
-  .select::after {
+}
+.select::after {
     -webkit-transition: .25s all ease;
     -o-transition: .25s all ease;
     transition: .25s all ease;
-  }
+}
 
+/* Submit button */
+#filterSpotSubmit{
+    background-color: #26a69a;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    /* font-family: Raleway; */
+    cursor: pointer;
+}
   .contentDiv {
-    float: left;
-    width: 74%;
+    /* float: left; */
+    /* width: 74%; */
     background-color: #272A57;
     border: solid 2.5px #59A2FE;
     border-radius: 15px;
     margin-bottom: 15px;
 }
 
+.ownerProfileHeader {
+    color: #B1D3FE;
+    text-align: center;
+}
 
+.addSpotBtn {
+    background: #511980;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    border-color: #59A2FE;
+    border-width: 2px;
+
+    padding: 10px;
+    margin: 20px;
+}
