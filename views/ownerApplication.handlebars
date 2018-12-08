@@ -1,0 +1,95 @@
+    
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
+
+<!-- Date and Time picker -->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+{{!-- <link href="/styles/dateTimePickerStyle.css" rel="stylesheet"> --}}
+{{!-- <link href="/styles/materialize.css" rel="stylesheet"> --}}
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+{{!-- TODO: Figure out how to add navBar partial with correct styling --}}
+{{!-- {{> navBar}} --}}
+
+<form id="regForm" method="POST" action="/api/parkingspace">
+    <h4>List Your Parking Space</h4>
+    <!-- One "tab" for each step in the form: -->
+    <!-- FIRST TAB -->
+    <div class="tab">
+        <h5>Enter Your Address</h5>
+
+        <!-- address input-->
+        <div class="control-group">
+            <label class="control-label">Address</label>
+            <div class="controls">
+                <input id="autocomplete" id="address" name="address" type="text" placeholder="address line 1"
+                class="input-xlarge">
+                <p class="help-block">Street address, P.O. box, company name, c/o</p>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <!-- SECOND TAB -->
+    <div class="tab">
+        <h5>Parking Location</h5>
+        <p>
+            Customer will go to your posted location. Adjust the pin to match your parking space exact location.
+        </p>
+    </div> --}}
+
+    <!-- THIRD TAB -->
+    <div class="tab">
+            <h5>Parking Space</h5>
+            <p>How much is the cost per day?<input placeholder="price" name="price" ></p>
+
+            <p>
+                Which type of parking space do you have?
+                <label><input type="radio" name="spaceCover" value="uncovered"><span>Uncovered</span></label>
+                <label><input type="radio" name="spaceCover" value="covered"><span>Covered</span></label>
+                <label><input type="radio" name="spaceCover" value="garage"><span>Garage</span></label>
+            </p>
+
+            <p>
+                What size is your parking space?
+                <label><input type="radio" name="spaceSize" value="standard"><span>Standard</span></label>
+                <label><input type="radio" name="spaceSize" value="compact"><span>Compact</span></label>
+                <label><input type="radio" name="spaceSize" value="motorcycle"><span>Motorcycle</span></label>
+                <label><input type="radio" name="spaceSize" value="rv"><span>RV</span></label>
+            </p>
+            <p>Additional description of the Parking Space:<input placeholder="Type here" name="description" ></p>
+    </div>
+    
+    <div style="overflow:auto;">
+        <div style="float:right;">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+    </div>
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+</form>
+
+
+{{!-- GoogleMap JS code --}}
+
+{{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script> --}}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
+        async defer></script>
+        
+<script src="/js/mapJS.js"></script>
+
+<!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script> 
+
+<!-- JavaScript/jQuery -->
+<script src="/js/application.js"></script>
+{{!-- <script src="/js/materialize.js"></script> --}}
+<script src="/js/daysCalculation.js"></script>

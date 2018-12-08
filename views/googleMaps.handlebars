@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="/styles/googleStyles.css">
+
+{{!-- <!-- Bootstrap CSS --> --}}
+  {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/spaceCard.css">
+
+{{!-- <!-- jquery --> --}}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{{> navBar}}
+
+    <div id="wrapper">
+        <div class="contentDiv">
+            {{!-- TODO: Styling for filter bar --}}
+            <form action="" id="spaceInput">
+
+                    <div class="filterPosition">
+                      
+                        <div class="select">
+                            <select name="spaceCover" id="">
+                            <option value="">Parking Type</option>
+                            <option value="uncovered">Uncovered</option>
+                            <option value="covered">Covered</option>
+                            <option value="garage">Garage</option>
+                            </select>
+                        </div>
+
+                        <div class="select">
+                            <select name="spaceSize" id="">
+                            <option value="">Parking Size</option>
+                            <option value="standard">Standard</option>
+                            <option value="compact">Compact</option>
+                            <option value="motorcycle">Motorcycle</option>
+                            <option value="rv">RV</option>
+                            </select>
+                        </div>
+
+                        <div class="price">
+                            {{!-- <label for="minPrice">Min Price: </label> --}}
+                            <input id="minPrice" type="text" name="minPrice" placeholder="Min Price"><br>
+                        </div>
+
+                        <div class="price">
+                            {{!-- <label for="maxPrice">Max Price:</label> --}}
+                            <input id="minPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
+                        </div>
+
+                    </div>
+
+            </form>
+        </div>
+
+        <div class="contentDiv panel-group spaceCardGroup" id="aviSpotsTable"></div>
+
+        <div id="map" class="mapRight"></div>
+    </div>
+
+    {{!-- <!--- Google API JAVASCRIP CODE---> --}}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcHE7ZaBAeXI9teNooIxDRRcj4pjZprUw&libraries=places&callback=initAutocomplete"
+      async defer></script>
+  {{!-- GoogleMap JS code --}}
+  <script src="/js/mapJS.js"></script>
+  <script src ="/js/loadPin.js"></script>

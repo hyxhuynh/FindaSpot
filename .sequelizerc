@@ -1,0 +1,6 @@
+const path = require("path");
+
+module.exports = {
+    // Configuration to override default config file path
+    "config": path.resolve('./config', 'config.js')
+}
