@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
 
     // import models for association
     const user = require("./user")(sequelize,DataTypes);
-    const ParkingSpace = require("./ParkingSpace")(sequelize,DataTypes);
+    const ParkingSpace = require("./parkingSpace")(sequelize,DataTypes);
 
     // A Reservation has a parker (user), a user can make multiple Reservations
     Reservation.belongsTo(user, {as:"parker", foreignKey: "parkerId"});
