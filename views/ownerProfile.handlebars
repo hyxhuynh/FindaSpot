@@ -2,16 +2,23 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/owner.css" />
 
 {{> navBar}}
 
       {{!-- Current spot posted card --}}
-
-      <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="https://via.placeholder.com/200x150" alt="Card image cap">
-  <div class="card-body">
-    <p class="card-text">Photo up top and then information about current posted spot.</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 panel col-md-offset-3">
+      <div class="panel-heading row">
+        <img class="col-12" src="https://via.placeholder.com/200x150" alt="Card image cap">
+      </div>
+      <div class="panel-body row">
+        <p class="col-xs-12 col-md-10 col-md-offset-1">Photo up top and then information about current posted spot.</p>
+      </div>
+      <div class="panel-footer row">
+        <a href="/owner/application" class="btn col-md-6 col-md-offset-3">Add a new SPOT</a>
+      </div>
+    </div>
   </div>
 </div>
-
-<a href="/owner/application"><button>Add a new SPOT</button></a>
