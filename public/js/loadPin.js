@@ -101,3 +101,8 @@ $(document).ready( function () {
 
     });
 });
+
+$(document).on("click",".spaceCard_reserveBtn", function() {
+    console.log("clicked",$(this).data());
+    window.location.href = "/reservespace";
+});
