@@ -1,0 +1,17 @@
+<div class="panel spaceCard">
+    <div class="panel-heading spaceCard-header">{{address}}</div>
+    <div class="panel-body">
+
+        <img class="spaceCard_img" src="https://maps.googleapis.com/maps/api/streetview?parameters&size=200x150&fov=50&location={{address}}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk" alt="Parking Space at {{address}}">
+
+        {{!-- <button class="spaceCard_reserveBtn">Reserve</button> --}}
+
+        <div>
+            <span class="spaceCard_tag">{{spaceCover}}</span>
+            <span class="spaceCard_tag">{{spaceSize}}</span>
+            <span class="spaceCard_tag">${{price}}</span>
+        </div>
+    </div>
+    
+    </div>
+    

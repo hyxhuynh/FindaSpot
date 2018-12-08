@@ -7,7 +7,14 @@ module.exports = function(app) {
     });
     //Render profile page
     app.get("/ownerProfile", auth.isLoggedIn, function(req, res) {
-        res.render("ownerProfile");
+        const user = req.user;
+        const id = user.id;
+        db.ParkingSpace.findAll({
+            where: {ownerId:id}
+        }).then( response => {
+            console.log(response);
+            res.render("ownerProfile", {parkingSpaces: response});
+        });
     });
 
     // Render Driver Application page

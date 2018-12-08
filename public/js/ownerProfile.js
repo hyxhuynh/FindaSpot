@@ -19,11 +19,11 @@ function makeParkingSpaceCard(spaceData) {
         .attr("src",`https://maps.googleapis.com/maps/api/streetview?parameters&size=200x150&fov=50&location=${address}&key=AIzaSyAhgUQXNuEKFFe63FaEUB8KY1la5q44rdk`);
     body.append(spaceImg);
 
-    // Add reserve button to body
-    let reserveButton = $("<button>").addClass("spaceCard_reserveBtn")
-        .text("Reserve")
-        .data("id", spaceData.id);
-    body.append(reserveButton);
+    // // Add reserve button to body
+    // let reserveButton = $("<button>").addClass("spaceCard_reserveBtn")
+    //     .text("Reserve")
+    //     .data("id", spaceData.id);
+    // body.append(reserveButton);
 
     // Add tags to body
     let tagDiv = $("<div>");
@@ -38,41 +38,17 @@ function makeParkingSpaceCard(spaceData) {
 // Refreshes ParkingSpace card display area with provided data
 function displaySpaceCards(data) {
     // Clear all existing cards
-    $("#aviSpotsTable").empty();
+    $("#ownerSpaces").empty();
 
     // Make a new card for each space data entry
     data.forEach(spaceData => {
-        $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
+        $("#ownerSpaces").append(makeParkingSpaceCard(spaceData));
     });
 }
 
 
 $(document).ready( function () {
     console.log("Linked to pin page");
-
-    // Function to Add markers from database to google map
-    function addMarker(spot) {
-        var marker = new google.maps.Marker({
-            position: {lat: spot.latitude, lng: spot.longitude },
-            map: map,
-            icon: "https://maps.gstatic.com/mapfiles/ms2/micons/parkinglot.png"
-        });
-        // Check if needs different iconImage vs defult setIcon to props.icon link
-        if (spot.icon) {
-            // set icon image
-            marker.setIcon(props.icon);
-        }
-        // Check if needs content with marker
-        if (spot.description) {
-            var infowindow = new google.maps.InfoWindow({
-                content: spot.description});
-        }
-        // On click of marker display infoWindow
-        marker.addListener("click",function () {
-            infowindow.open(map, marker);
-        });
-
-    }
 
     // Grab the users current geoLocation
     navigator.geolocation.getCurrentPosition(function (currentPosition) {
@@ -89,13 +65,8 @@ $(document).ready( function () {
             console.log("data ", data);
             console.log("firstSpotLat: ", data[0].latitude, "FirstSpotLng: ", data[0].longitude);
 
-            for (let i = 0; i < data.length; i++) {
-                // Add pins to map
-                addMarker(data[i]);
-            }
-
             // Create cards for parking spaces and add to card area
-            displaySpaceCards(data);
+            // displaySpaceCards(data);
 
         });
 
