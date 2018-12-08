@@ -22,8 +22,8 @@ $(function() {
 
 //check if user password matches the password in the confirm field
 $("#register-form").submit(function(e){
-    var pass1= $("[name='password']").val(); //grabs the value of password in register form password field
-    var pass2 = $("[name='confirm-password']").val(); //grabs the value of confirm-password in register confirm password form field
+    var pass1= $("#register-form input[name='password']").val(); //grabs the value of password in register form password field
+    var pass2 = $("#register-form input[name='confirm-password']").val(); //grabs the value of confirm-password in register confirm password form field
     console.log(pass1);
     console.log(pass2);
     if (pass1 !== pass2){ //checks values
