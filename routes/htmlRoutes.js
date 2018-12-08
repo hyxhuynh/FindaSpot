@@ -7,6 +7,7 @@ module.exports = function(app) {
     });
     //Render profile page
     app.get("/ownerProfile", auth.isLoggedIn, function(req, res) {
+        const user = req.user;
         res.render("ownerProfile");
     });
 

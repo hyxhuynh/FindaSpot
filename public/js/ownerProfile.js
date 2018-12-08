@@ -66,7 +66,7 @@ $(document).ready( function () {
             console.log("firstSpotLat: ", data[0].latitude, "FirstSpotLng: ", data[0].longitude);
 
             // Create cards for parking spaces and add to card area
-            displaySpaceCards(data);
+            // displaySpaceCards(data);
 
         });
 
