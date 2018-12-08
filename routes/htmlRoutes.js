@@ -8,7 +8,13 @@ module.exports = function(app) {
     //Render profile page
     app.get("/ownerProfile", auth.isLoggedIn, function(req, res) {
         const user = req.user;
-        res.render("ownerProfile");
+        const id = user.id;
+        db.ParkingSpace.findAll({
+            where: {ownerId:id}
+        }).then( response => {
+            console.log(response);
+            res.render("ownerProfile", {parkingSpaces: response});
+        });
     });
 
     // Render Driver Application page
