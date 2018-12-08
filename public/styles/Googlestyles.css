@@ -1,6 +1,4 @@
-*,
-*:after,
-*:before {
+* {
     box-sizing: border-box;
 }
 
@@ -66,17 +64,31 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    /* width: 50% */
     /* position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%); */
   }
+
+  .price {
+    position: relative;
+    display: block;
+    /* width: 20em;
+    height: 3em; */
+    line-height: 3;
+    /* background: orange; */
+    overflow: hidden;
+    border-radius: .25em;
+    margin-right: 10px;
+  }
+
   h1 {
     text-align: center;
   }
   /* Reset Select */
   select {
-    -webkit-appearance: none;
+    -webkit-appearance: none; 
     -moz-appearance: none;
     -ms-appearance: none;
     appearance: none;
@@ -96,6 +108,7 @@ body {
     background: orange;
     overflow: hidden;
     border-radius: .25em;
+    margin-right: 10px;
   }
   select {
     width: 100%;

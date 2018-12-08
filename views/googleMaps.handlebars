@@ -12,41 +12,43 @@
 
 {{> navBar}}
 
-{{!-- <!--Parking Spots div and Map div--> --}}
     <div id="wrapper">
         <div id="aviSpotsTable">
             TODO:
             <form action="" id="spaceInput">
-                <div>
-                    <div class="filterPosition">
-                      
-                      <div class="select">
-                        <select name="spaceCover" id="">
-                          <option value="">Parking Type</option>
-                          <option value="uncovered">Uncovered</option>
-                          <option value="covered">Covered</option>
-                          <option value="garage">Garage</option>
-                        </select>
-                      </div>
-                      
-                      </div>
 
                     <div class="filterPosition">
                       
-                      <div class="select">
-                        <select name="spaceSize" id="">
-                          <option value="">Parking Size</option>
-                          <option value="standard">Standard</option>
-                          <option value="compact">Compact</option>
-                          <option value="motorcycle">Motorcycle</option>
-                          <option value="rv">RV</option>
-                        </select>
-                      </div>
-                      
+                        <div class="select">
+                            <select name="spaceCover" id="">
+                            <option value="">Parking Type</option>
+                            <option value="uncovered">Uncovered</option>
+                            <option value="covered">Covered</option>
+                            <option value="garage">Garage</option>
+                            </select>
+                        </div>
+
+                        <div class="select">
+                            <select name="spaceSize" id="">
+                            <option value="">Parking Size</option>
+                            <option value="standard">Standard</option>
+                            <option value="compact">Compact</option>
+                            <option value="motorcycle">Motorcycle</option>
+                            <option value="rv">RV</option>
+                            </select>
+                        </div>
+
+                        <div class="price">
+                            {{!-- <label for="minPrice">Min Price: </label> --}}
+                            <input id="minPrice" type="text" name="minPrice" placeholder="Min Price"><br>
+                        </div>
+
+                        <div class="price">
+                            {{!-- <label for="maxPrice">Max Price:</label> --}}
+                            <input id="minPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
+                        </div>
+
                     </div>
-
-                  </div>
-
 
             </form>
 
