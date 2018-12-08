@@ -3,8 +3,6 @@ const db = require("../models");
 const sequelize = require("sequelize");
 const Op =sequelize.Op;
 
-const userCurrentLocation = require("../public/js/MapJS");
-
 module.exports = function(app) {
 
     /***************************************
@@ -90,7 +88,6 @@ module.exports = function(app) {
                 order: [[sequelize.literal("distance ASC")]]
             }).then( response => {
                 res.json(response);
-                console.log(response);
             });
         } else {
             res.status(404).end();

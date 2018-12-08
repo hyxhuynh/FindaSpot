@@ -1,6 +1,5 @@
 $(document).ready( function () {
-    console.log("Linked to pin page")
-
+    console.log("Linked to pin page");
     // Function to Add markers from database to google map
     function addMarker(spot) {
         var marker = new google.maps.Marker({
@@ -16,7 +15,7 @@ $(document).ready( function () {
         // Check if needs content with marker
         if (spot.description) {
             var infowindow = new google.maps.InfoWindow({
-                content: spot.description});
+                content: `<strong>Discription: </strong>${spot.description}<br><strong>Type: </strong>${spot.spaceCover}<br><strong>Size: </strong>${spot.spaceSize}`});
         }
         // On click of marker display infoWindow
         marker.addListener("click",function () {
@@ -50,5 +49,3 @@ $(document).ready( function () {
 
     });
 });
-
-    
