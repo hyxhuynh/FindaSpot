@@ -83,12 +83,10 @@ $(document).ready( function () {
             }
 
             // Create cards for parking spaces and add to card area
-            // // $("#aviSpotsTable").empty();
-            // data.forEach(spaceData => {
-            //     $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
-            // });
-            $("#aviSpotsTable").append(makeParkingSpaceCard(data[0]));
-            console.log("MADE");
+            $("#aviSpotsTable").empty();
+            data.forEach(spaceData => {
+                $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
+            });
 
             // now take the data returned from the API and and add those pins to the map
 
