@@ -17,8 +17,15 @@
         <div class="formWrapper">
             {{!-- TODO: Styling for filter bar --}}
             <form action="" id="spaceInput">
+                    <div class="filterPosition1">
 
-                    <div class="filterPosition">
+                        <div class="address">
+                            <input  id="autocomplete" id="address" type="text" name="address" placeholder="address"><br>
+                        </div>
+
+                    </div>
+
+                    <div class="filterPosition2">
                       
                         <div class="select">
                             <select name="spaceCover" id="">
@@ -46,10 +53,12 @@
 
                         <div class="price">
                             {{!-- <label for="maxPrice">Max Price:</label> --}}
-                            <input id="minPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
+                            <input id="maxPrice" type="text" name="maxPrice" placeholder="Max Price"><br>
                         </div>
 
                     </div>
+
+                    <button>Submit</button>
 
             </form>
         </div>

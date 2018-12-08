@@ -58,11 +58,16 @@ body {
     margin-left: 45%
 }
 
+.filterPosition1 {
+    display: flex;
+    padding: 10px;
+  }
+
 /* Style for Filtering bar */
 
-  .filterPosition {
+  .filterPosition2 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10px;
     /* width: 50% */
     /* position: absolute;
@@ -71,7 +76,7 @@ body {
     transform: translate(-50%,-50%); */
   }
 
-  .price {
+  .price, .address {
     position: relative;
     display: block;
     /* width: 20em;
