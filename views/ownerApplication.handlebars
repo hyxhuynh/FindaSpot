@@ -1,6 +1,7 @@
     
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/googleStyles.css">
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/application.css" />
-
 <!-- Date and Time picker -->
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,8 +12,10 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-{{!-- TODO: Figure out how to add navBar partial with correct styling --}}
-{{!-- {{> navBar}} --}}
+{{!-- <!-- jquery --> --}}
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{{> navBar}}
 
 <form id="regForm" method="POST" action="/api/parkingspace">
     <h4>List Your Parking Space</h4>
@@ -23,7 +26,7 @@
 
         <!-- address input-->
         <div class="control-group">
-            <label class="control-label">Address</label>
+            {{!-- <label class="control-label">Address</label> --}}
             <div class="controls">
                 <input id="autocomplete" id="address" name="address" type="text" placeholder="address"
                 class="input-xlarge">
