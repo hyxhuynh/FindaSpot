@@ -1,6 +1,7 @@
 // Makes a new HTML card for a ParkingSpace
 function makeParkingSpaceCard(spaceData) {
     const address = spaceData.address;
+
     // Setup main card container
     let card = $("<div>").addClass("panel spaceCard");
 
@@ -34,9 +35,22 @@ function makeParkingSpaceCard(spaceData) {
     return card;
 }
 
+// Refreshes ParkingSpace card display area with provided data
+function displaySpaceCards(data) {
+    // Clear all existing cards
+    $("#aviSpotsTable").empty();
+
+    // Make a new card for each space data entry
+    data.forEach(spaceData => {
+        $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
+    });
+}
+
+
 $(document).ready( function () {
     console.log("Linked to pin page");
 
+    // Adds a marker to the map at the given location
     function addMarker(spot) {
         var marker = new google.maps.Marker({
             position: {lat: spot.latitude, lng: spot.longitude },
@@ -83,10 +97,10 @@ $(document).ready( function () {
             }
 
             // Create cards for parking spaces and add to card area
-            $("#aviSpotsTable").empty();
-            data.forEach(spaceData => {
-                $("#aviSpotsTable").append(makeParkingSpaceCard(spaceData));
-            });
+            displaySpaceCards(data);
+
+
+            // DEPRECATED CODE
 
             // now take the data returned from the API and and add those pins to the map
 
