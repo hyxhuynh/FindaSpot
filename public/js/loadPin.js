@@ -1,5 +1,7 @@
 $(document).ready( function () {
     console.log("Linked to pin page")
+
+    // Function to Add markers from database to google map
     function addMarker(spot) {
         var marker = new google.maps.Marker({
             position: {lat: spot.latitude, lng: spot.longitude },
@@ -22,6 +24,8 @@ $(document).ready( function () {
         });
 
     };
+
+    // Grab the users current geoLocation
     navigator.geolocation.getCurrentPosition(function (currentPosition) {
         var userLat = currentPosition.coords.latitude;
         var userLng = currentPosition.coords.longitude;
@@ -42,22 +46,6 @@ $(document).ready( function () {
                 addMarker(data[i]);
                 
             }
-        
-            // now take the data returned from the API and and add those pins to the map
-
-            // address: "1457 7th Avenue, Seattle, WA, USA"
-            // createdAt: "2018-12-06T22:35:18.000Z"
-            // description: "none"
-            // distance: 15.203535717874976
-            // id: 7
-            // latitude: 47.6110295
-            // longitude: -122.33293
-            // ownerId: 1
-            // price: 15
-            // spaceCover: "uncovered"
-            // spaceSize: "compact"
-            // updatedAt: "2018-12-06T22:35:18.000Z"
-
         });
 
     });
