@@ -14,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     user.hasMany(Reservation, {foreignKey:"parkerId"});
 
     // A Reservation has a ParkingSpace, a ParkingSpace can have multiple Reservations
-    Reservation.belongsTo(ParkingSpace);
-    ParkingSpace.hasMany(Reservation);
+    Reservation.belongsTo(ParkingSpace, {foreignKey: "parkingSpaceId"});
+    ParkingSpace.hasMany(Reservation, {foreignKey: "parkingSpaceId"});
 
     return Reservation;
 };

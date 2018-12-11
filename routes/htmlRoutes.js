@@ -5,7 +5,7 @@ module.exports = function(app) {
     app.get("/", auth.isLoggedIn, function(req, res) {
         res.render("chooseProfile");
     });
-    //Render profile page
+    //Render owner's profile page
     app.get("/ownerProfile", auth.isLoggedIn, function(req, res) {
         const user = req.user;
         const id = user.id;
@@ -17,10 +17,24 @@ module.exports = function(app) {
         });
     });
 
-    // Render Driver Application page
-    // app.get("/driver/application", function(req, res) {
-    //     res.render("driverApplication");
-    // });
+    //Render driver's profile page
+    app.get("/driverProfile", auth.isLoggedIn, function(req, res) {
+        const user = req.user;
+        const id = user.id;
+        db.Reservation.findAll({
+            where: { parkerId: id },
+            include: [ {
+                model: db.user,
+                as: "parker"
+            }, {
+                model: db.ParkingSpace,
+                include: [ { model: db.user, as: "owner" }]
+            }]
+        }).then( response => {
+            console.log(response);
+            res.render("driverProfile", {reservations: response});
+        });
+    });
 
     // Render Driver Application page
     app.get("/googleMapsPage", function(req, res) {
@@ -28,12 +42,29 @@ module.exports = function(app) {
     });
 
     // Render page to make reservation on space
-    app.get("/reservespace", function (req, res) {
+    // Driver can pick the dates and time
+    app.get("/reservation", function (req, res) {
         res.render("driverApplication");
     });
 
-    app.get("/reservespace/confirmation", function (req, res) {
-        res.render("reservationConfirmation");
+    // Render Reservation Confirmation  page
+    app.get("/reservation/confirmation", function (req, res) {
+        var query = req.query;
+        db.ParkingSpace.findOne({
+            where: { id: query.parkingSpaceId },
+            include: [ { model: db.user, as: "owner" } ]
+        }).then( response => {
+            res.render("reservationConfirmation", {
+                ownerFirstName: response.owner.firstname,
+                ownerLastName: response.owner.lastname,
+                ownerEmail: response.owner.email,
+                reservationStart: query.reservationStart,
+                reservationEnd: query.reservationEnd,
+                arrivalTime: query.arrivalTime,
+                leavingTime: query.leavingTime,
+                parkingSpaceId: query.parkingSpaceId
+            });
+        });
     });
 
     // Render Owner Application page
@@ -41,11 +72,7 @@ module.exports = function(app) {
         res.render("ownerApplication");
     });
 
-    // Render Our story page
-    // User does not need to login
-    app.get("/ourStory", function(req, res) {
-        res.render("ourStory");
-    });
+
     // Render Owner Confirmation/Summary page
     app.get("/owner/confirmation", function(req, res) {
         console.log("REQ.QUERY", req.query);
@@ -54,11 +81,14 @@ module.exports = function(app) {
             price: req.query.price,
             spaceCover: req.query.spaceCover,
             spaceSize: req.query.spaceSize,
-            description: req.query.description,
-            ownerName: req.query.ownerName,
-            ownerPhone: req.query.ownerPhone,
-            ownerEmail: req.query.ownerEmail
+            description: req.query.description
         });
+    });
+
+    // Render Our story page
+    // User does not need to login
+    app.get("/ourStory", function(req, res) {
+        res.render("ourStory");
     });
 
     // Render 404 page for any unmatched routes
