@@ -108,7 +108,7 @@ $(document).ready( function () {
 
 $(document).on("click",".spaceCard_reserveBtn", function() {
     console.log("clicked",$(this).data());
-    window.location.href = "/reservespace";
+    window.location.href = "/reservation?" + "parkingSpaceId=" + $(this).data().id;
 });
 var newInputAddress = $("#autocomplete");
 var newCoverFilter = $("#cover");
@@ -152,7 +152,6 @@ $("#filterSpotSubmit").on("click", function (event) {
             console.log("newdata ", newData);
             console.log("firstSpotLat: ", newData[0].latitude, "FirstSpotLng: ", newData[0].longitude);
 
-            
             pinArray =newData;
 
             for (let i = 0; i < pinArray.length; i++) {
@@ -166,15 +165,7 @@ $("#filterSpotSubmit").on("click", function (event) {
 
             // Create cards for parking spaces and add to card area
             displaySpaceCards(newData);
-            
-
-            
-
         });
-
-
-
-        
     });
 });
 
@@ -211,5 +202,4 @@ $("#filterSpotSubmit").on("click", function (event) {
 
 //     });
 
-    
 // });

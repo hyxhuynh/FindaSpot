@@ -1,0 +1,26 @@
+{{!-- CSS --}}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="/styles/driverProfile.css" />
+
+{{> navBar}}
+
+{{!-- Current spot posted card --}}
+<div class="container contentDiv">
+  <div class="row">
+    <h2 class="col-md-12 driverProfileHeader">Reserved Parking Spots</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 " id="driverSpaces">
+      {{#each reservations}}
+        {{> driverSpaceCard}}
+      {{/each}}
+    </div>
+  </div>
+
+</div>
+
+
+
+{{!-- JavaScript/jQuery --}}
+<script src ="/js/driverProfile.js"></script>

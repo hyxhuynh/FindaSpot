@@ -146,29 +146,61 @@ $("#regForm").on("submit", function (event) {
 
 });
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split("&"),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split("=");
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
 $("#reservationForm").on("submit", function (event) {
     // Prevent default form submission to add more information before submitting
     event.preventDefault();
 
 
-    let form = $(this);
+    // let form = $(this);
 
-    console.log("FORM SUBMITTED");
+    // console.log("FORM SUBMITTED");
 
-    let additionalFormData ={
-        spaceId: 1
-    };
+    // let additionalFormData ={
+    //     spaceId: 1
+    // };
 
-    for (param in additionalFormData) {
-        form.append($("<input>", {
-            type: "hidden",
-            name: param,
-            value: additionalFormData[param]
-        }));
-    }
+    // for (param in additionalFormData) {
+    //     form.append($("<input>", {
+    //         type: "hidden",
+    //         name: param,
+    //         value: additionalFormData[param]
+    //     }));
+    // }
 
-    // Use form[0] to call JS native submit() on form instead of $.submit() to prevent infinite loop
-    form[0].submit();
+    // // Use form[0] to call JS native submit() on form instead of $.submit() to prevent infinite loop
+    // form[0].submit();
 
+    var reservation = {};
+    reservation.reservationStart = $("#startDateHTML").val();
+    reservation.reservationEnd = $("#endDateHTML").val();
+    reservation.arrivalTime = $("#arrivalTimeHTML").val();
+    reservation.leavingTime = $("#leavingTimeHTML").val();
+    reservation.parkingSpaceId = getUrlParameter("parkingSpaceId");
 
+    var url = "/api/reservation";
+
+    $.post(url, reservation).then(function (data) {
+        console.log("Reservation DATA: ", data);
+        window.location.href = "/reservation/confirmation?"
+        + `reservationStart=${reservation.reservationStart}` + "&"
+        + `reservationEnd=${reservation.reservationEnd}` + "&"
+        + `arrivalTime=${reservation.arrivalTime}` + "&"
+        + `leavingTime=${reservation.leavingTime}` + "&"
+        + `parkingSpaceId=${reservation.parkingSpaceId}`;
+    });
 });
