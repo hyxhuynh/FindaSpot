@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Background Image */
+body {
+    background-image: url(../images/parking_spots_one_car.jpg);
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Nav bar */
+#navBackground {
+    background-color: #272A57;
+    border-bottom: solid black 2px;
+}
+
+.navbar-brand {
+    color: #59A2FE !important;
+    font-weight: bold;
+}
+
+a {
+    color: #B1D3FE !important;
+}
+
+a:hover {
+    color:  #59A2FE !important;
+}
+
+/* Header */
+.driverProfileHeader {
+    color: #B1D3FE;
+    text-align: center;
+}
+
+.contentDiv {
+    background-color: #272A57;
+    border: solid 2.5px #59A2FE;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* Space Card for Reserved Spots */
+.spaceCard {
+    text-align: center;
+    display:inline-block;
+
+    margin: 10px 20px !important;
+}
+
+.spaceCard > .spaceCard-header {
+    background: #26a69a;
+    color: #e6e6fa;
+    font-weight: bold;
+}
+
+.spaceCard_img {
+    margin: 0px 5px 10px;
+}
+
+.spaceCard_reserveBtn {
+    display: block;
+
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    margin: 0px auto 10px;
+
+    background: #272A57;
+    color: #B1D3FE ;
+    font-size: 16px;
+    /* font-weight: bold; */
+}
+
+.spaceCard_tag {
+    display: inline-block;
+
+    background: #59A2FE;
+    color: #272A57;
+
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 3px;
+
+}
+
