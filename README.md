@@ -1,6 +1,5 @@
 # FindaSpot Parking App - Efficent Parking
 The FindaSpot app is designed for Seattleites like you and me, who are desperately searching for a parking spot to make it to that one meetup or the dinner reservation on Friday night. The goal was to create a site that is useful for all of us. FindaSpot is an ambitious idea and has many updates to come.
-Liri can take in 4 commands:
 
 # How to use FindaSpot - Two user options
 
