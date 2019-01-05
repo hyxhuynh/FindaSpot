@@ -232,9 +232,9 @@ module.exports = function(app) {
 
     // Route to get existing reservations
     app.get("/api/reservation", (req, res) => {
-        // TODO: Add filtering to return only desired Reservations
 
         db.Reservation.findAll({
+            where: { parkerId: req.user.id },
             include: [
                 {
                     // Include inforation for user that placed the reservation
@@ -266,7 +266,8 @@ module.exports = function(app) {
     // Route to create new Reservation on a ParkingSpace
     app.post("/api/reservation", (req, res) => {
         //TEMPORARY
-        return res.redirect("/reservespace/confirmation");
+        // return res.redirect("/reservespace/confirmation");
+
 
         // REIMPLEMENT LATER
         const data = req.body;
@@ -276,8 +277,8 @@ module.exports = function(app) {
         let newReservation = {};
 
         // Set ID references for parker(user) and ParkingSpace
-        newReservation.parkerId = data.parkerId;
-        newReservation.ParkingSpaceId = data.ParkingSpaceId;
+        newReservation.parkerId = req.user.id;
+        newReservation.parkingSpaceId = data.parkingSpaceId;
 
         // Check for reservationStart time, format to Date, otherwise give error response
         if (data.reservationStart) {
@@ -297,8 +298,10 @@ module.exports = function(app) {
 
         // Check for entry in all fields
         if ( !isNaN(newReservation.reservationStart.getTime()) && !isNaN(newReservation.reservationEnd)){
-            db.Reservation.create(newReservation).then( response => {
+            db.Reservation.create(newReservation).then( (response) => {
                 res.status(201).json(response);
+                console.log("RESERVATION response", response.dataValues);
+
             }).catch(err => {
                 // If unknown error cause, rethrow error
                 res.status(500).send("500 INTERNAL SERVER ERROR: Unknown error");

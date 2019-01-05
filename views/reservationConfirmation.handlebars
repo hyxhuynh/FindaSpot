@@ -9,9 +9,40 @@
 
 {{> navBar}}
 
-<form class="regForm"  action="/googleMapsPage" style="text-align: center">
-    <h5>Your Reservation is confirmed</h5>    
+<form class="regForm"  action="/driverProfile" style="text-align: center">
+    <h4>Your Reservation Is Confirmed</h4>
+    <div class="tab">
+        <h5>Reservation Time:</h5>
+        <p>
+            <span id="stats">Start Date:</span> {{reservationStart}}
+        </p>
+        <p>
+            <span id="stats">Arrival Time:</span> {{arrivalTime}}
+        </p>
+        <p>
+            <span id="stats">End Date:</span> {{reservationEnd}}
+        </p>
+        <p>
+            <span id="stats">Leaving Time:</span> {{leavingTime}}
+        </p>
+        <h5>Owner's Contact Information</h5>
+        <p>
+            <span id="stats">Name:</span> {{ownerFirstName}} {{ownerLastName}}
+        </p>  
+        <p>
+            <span id="stats">Email:</span> {{ownerEmail}}
+        </p> 
+    </div> 
     <br>
-    <button type="submit" class="indigo darken-1">Back to the map!</button>
+    <button type="submit">See All Reserved Parking Spots</button>
 
 </form>
+
+{{!-- GoogleMap JS code --}}
+<script src="/js/mapJS.js"></script>
+
+<!-- Moment.js -->
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script>  --}}
+
+<!-- JavaScript/jQuery -->
+<script src="/js/application.js"></script>
